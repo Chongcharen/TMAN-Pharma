@@ -73,24 +73,53 @@
     <Reference Include="DOTween">
       <HintPath>Assets\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>Assets\DOTween\DOTween46.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween43">
       <HintPath>Assets\DOTween\DOTween43.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets\DOTween\DOTween46.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween50">
       <HintPath>Assets\DOTween\DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets\Plugins\LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Plugins\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>Assets\Plugins\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Intent\ImplementClass\AbstractIntent.cs" />
     <Compile Include="Assets\Script\Intent\ImplementClass\IPageBehavior.cs" />
+    <Compile Include="Assets\Script\Intent\IntentController\MenuLayoutController.cs" />
     <Compile Include="Assets\Script\Intent\IntentLogin.cs" />
+    <Compile Include="Assets\Script\Intent\IntentMenu.cs" />
     <Compile Include="Assets\Script\Main\AppStart.cs" />
     <Compile Include="Assets\Script\Main\Main.cs" />
     <Compile Include="Assets\Script\Manager\IntentManager.cs" />
     <Compile Include="Assets\Script\Manager\VariableManager.cs" />
+    <Compile Include="Assets\Script\User\IMemberBehavior.cs" />
+    <Compile Include="Assets\Script\User\Member.cs" />
+    <Compile Include="Assets\Script\User\Profile.cs" />
+    <Compile Include="Assets\Script\Utility\ClipboardHelper.cs" />
+    <Compile Include="Assets\Script\Utility\InternetProcess.cs" />
+    <Compile Include="Assets\Script\Utility\JsonHelper.cs" />
+    <Compile Include="Assets\Script\Utility\StaticColor.cs" />
+    <Compile Include="Assets\Script\Utility\StaticCoroutine.cs" />
+    <Compile Include="Assets\Script\Utility\StaticVariable.cs" />
+    <Compile Include="Assets\Script\Utility\UIHelper.cs" />
+    <Compile Include="Assets\Script\Utility\Utils.cs" />
+    <Compile Include="Assets\Script\Utility\share\ScreenshotHandler.cs" />
+    <Compile Include="Assets\Script\WebService\ForgotPassword.cs" />
+    <Compile Include="Assets\Script\WebService\ServiceRequest.cs" />
+    <Compile Include="Assets\Script\WebService\WWWRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\DOTween\DOTween.XML" />
@@ -99,6 +128,7 @@
     <None Include="Assets\DOTween\DOTween50.xml" />
     <None Include="Assets\DOTween\Editor\DOTweenEditor.XML" />
     <None Include="Assets\DOTween\readme.txt" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

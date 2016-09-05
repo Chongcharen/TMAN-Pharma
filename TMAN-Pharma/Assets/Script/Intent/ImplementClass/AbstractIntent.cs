@@ -13,18 +13,28 @@ public class AbstractIntent : MonoBehaviour,IPageBehavior {
        // screenRect = GameObject.Find("Canvas").GetComponent<RectTransform>().rect;
     }
     public void ShowPage() {
-        Debug.Log("Page is Show!");
+    
     }
     public void LoadData() { }
     public void UpdatePage() { }
-    public void SetPosition() { }
-    public void SlideLeft() {
-        Debug.Log("SlideLeft "+VariableManager.GetInstance().screenCanvas.width);
-        transform.DOLocalMoveX(-VariableManager.GetInstance().screenCanvas.width, 0.5f);
+    public void SetPreviousPosition(){
+        transform.localPosition = new Vector3(-VariableManager.GetInstance().screenCanvas.width, 0, 0);
     }
-    public void SlideRight() {
-        transform.DOLocalMoveX(VariableManager.GetInstance().screenCanvas.width, 0.5f);
+    public void SetNextPosition(){
+        transform.localPosition = new Vector3(VariableManager.GetInstance().screenCanvas.width, 0, 0);
+    }
+    public void SlideLeft(bool SetActiveWhenComplete = true) {
+        transform.DOLocalMoveX(GetComponent<RectTransform>().localPosition.x - VariableManager.GetInstance().screenCanvas.width, 0.7f).SetDelay(0.2f).OnComplete(() => SlideComplete(SetActiveWhenComplete)) ;
+    }
+    public void SlideRight(bool SetActiveWhenComplete = true) {
+        transform.DOLocalMoveX(GetComponent<RectTransform>().localPosition.x + VariableManager.GetInstance().screenCanvas.width , 0.7f).SetDelay(0.2f).OnComplete(() => SlideComplete(SetActiveWhenComplete));
     }
 
-    
+    void SlideComplete(bool isActive)
+    {
+        this.gameObject.SetActive(isActive);
+    }
+
+
+
 }

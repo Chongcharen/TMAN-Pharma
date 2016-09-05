@@ -9,6 +9,7 @@ public class VariableManager : MonoBehaviour {
         if(instance == null)
         {
             instance = new GameObject("VariableManager").AddComponent<VariableManager>();
+
         }
         return instance;
     }

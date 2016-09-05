@@ -5,7 +5,6 @@ interface IPageBehavior {
     void ShowPage();
     void LoadData();
     void UpdatePage();
-    void SetPosition();
-    void SlideLeft();
-    void SlideRight();
+    void SlideLeft(bool closeWhenComplete);
+    void SlideRight(bool closeWhenComplete);
 }
