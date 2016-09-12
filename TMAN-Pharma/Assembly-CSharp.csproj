@@ -58,8 +58,10 @@
      <Compile Include="Assets\Script\Intent\IntentRegister.cs" />
      <Compile Include="Assets\Script\Intent\Popup\AlertPopup.cs" />
      <Compile Include="Assets\Script\Intent\Popup\ChoicePopup.cs" />
+     <Compile Include="Assets\Script\Intent\Popup\DropdownPopup.cs" />
      <Compile Include="Assets\Script\Intent\Popup\LoaderPopup.cs" />
      <Compile Include="Assets\Script\Intent\Popup\Popup.cs" />
+     <Compile Include="Assets\Script\Intent\UIController\DropDownController.cs" />
      <Compile Include="Assets\Script\Intent\UIController\ScrollviewController.cs" />
      <Compile Include="Assets\Script\Main\AppStart.cs" />
      <Compile Include="Assets\Script\Main\Main.cs" />

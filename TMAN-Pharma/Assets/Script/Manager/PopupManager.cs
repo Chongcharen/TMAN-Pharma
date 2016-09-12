@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 public class PopupManager : MonoBehaviour {
-    public GameObject screen;
+    public GameObject screen,screenDropdown;
     public GameObject loader;
+
+	public Dropdown dropdownPopup;
     void Awake()
     {
         Events.OpenLoader += OpenLoader;
         Events.PageReady += CloseLoader;
+		Events.LoadInstanceDropdown += Events_LoadInstanceDropdown;
     }
+
+    
 
     private void OpenLoader()
     {
@@ -21,4 +27,14 @@ public class PopupManager : MonoBehaviour {
         screen.SetActive(false);
         loader.SetActive(false);
     }
+
+	void Events_LoadInstanceDropdown (Dropdown target)
+	{
+		screenDropdown.SetActive (true);
+		screenDropdown.GetComponent<DropdownPopup> ().DropdownUpdate(target);
+		//dropdownPopup.ClearOptions ();
+
+
+	}
+		
 }

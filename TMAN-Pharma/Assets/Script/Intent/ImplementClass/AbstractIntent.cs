@@ -31,6 +31,8 @@ public class AbstractIntent : MonoBehaviour,IPageBehavior {
     public void HideBackButton() { }
     public void LoadData() { }
     public virtual void UpdatePage() {
+		if (!VariableManager.GetInstance.canDispatchListener)
+			return;
         Events.instance.PageReady_Dispatch();
     }
 
@@ -42,10 +44,10 @@ public class AbstractIntent : MonoBehaviour,IPageBehavior {
       
     }
     public void SlideLeft(bool SetActiveWhenComplete = true) {
-        transform.DOLocalMoveX(GetComponent<RectTransform>().localPosition.x - VariableManager.GetInstance.screenCanvas.width, 1f).SetDelay(0.2f).OnComplete(() => SlideComplete(SetActiveWhenComplete)) ;
+        transform.DOLocalMoveX(GetComponent<RectTransform>().localPosition.x - VariableManager.GetInstance.screenCanvas.width, 0.2f).SetDelay(0.2f).OnComplete(() => SlideComplete(SetActiveWhenComplete)) ;
     }
     public void SlideRight(bool SetActiveWhenComplete = true) {
-        transform.DOLocalMoveX(GetComponent<RectTransform>().localPosition.x + VariableManager.GetInstance.screenCanvas.width , 1f).SetDelay(0.2f).OnComplete(() => SlideComplete(SetActiveWhenComplete));
+        transform.DOLocalMoveX(GetComponent<RectTransform>().localPosition.x + VariableManager.GetInstance.screenCanvas.width , 0.2f).SetDelay(0.2f).OnComplete(() => SlideComplete(SetActiveWhenComplete));
     }
 
     void SlideComplete(bool isActive)

@@ -31,9 +31,6 @@ public class IntentManager : MonoBehaviour {
 
     public void SetIntent(Intent intent)
     {
-        Debug.Log("setintent");
-        Debug.Log("currentIndex " + currentIndex);
-        Debug.Log("nextindex " + nextIndex);
         if (!canSlide) return;
         nextIndex = (int)intent;
         if (currentIndex == nextIndex) return;
@@ -90,7 +87,6 @@ public class IntentManager : MonoBehaviour {
     #region Event
     private void OnPageReadyEvent()
     {
-        Debug.Log("pageready");
         SetAnimateSlide();
         if (intentNextSlide)
         {

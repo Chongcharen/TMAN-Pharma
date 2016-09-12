@@ -4,6 +4,7 @@ using System.Collections;
 public class VariableManager : MonoBehaviour {
     private static VariableManager instance;
     public Rect screenCanvas;
+	public bool canDispatchListener = false;
     public static VariableManager GetInstance
     {
         get

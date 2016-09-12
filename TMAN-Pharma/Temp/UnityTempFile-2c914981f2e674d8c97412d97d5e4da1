@@ -104,6 +104,8 @@
 'Assets/Script/Intent/Popup/ChoicePopup.cs'
 'Assets/Script/Intent/Popup/LoaderPopup.cs'
 'Assets/Script/Intent/Popup/Popup.cs'
+'Assets/Script/Intent/UIController/DropDownController.cs'
+'Assets/Script/Intent/UIController/DropDownPopupController.cs'
 'Assets/Script/Intent/UIController/ScrollviewController.cs'
 'Assets/Script/Main/AppStart.cs'
 'Assets/Script/Main/Main.cs'
