@@ -4,54 +4,61 @@ using System.Collections.Generic;
 using DG.Tweening;
 
 public class IntentManager : MonoBehaviour {
-    private static IntentManager instance;
+    public static IntentManager instance;
     private bool canSlide = true;
     private List<int> historyPage;
-    public int currentIntent = 0;
-    public int previousIntent = 0;
-    public int nextIntent = 0;
+    public int currentIndex = 0;
+    public int previousIndex = 0;
+    public int nextIndex = 0;
     public List<AbstractIntent> listPage;
-    public static IntentManager GetInstance() {
-        if (instance == null)
-        {
-            instance = new GameObject("Intentmanager").AddComponent<IntentManager>();
-        }
-        return instance;
-    }
+
+    private AbstractIntent currentIntent, previousIntent, nextIntent;
+    bool intentNextSlide = false;
+  
     void Awake()
     {
         instance = this;
         historyPage = new List<int>();
+        Events.PageReady += OnPageReadyEvent;
+        
     }
+    void Start()
+    {
+       
+    }
+
+    
+
     public void SetIntent(Intent intent)
     {
+        Debug.Log("setintent");
+        Debug.Log("currentIndex " + currentIndex);
+        Debug.Log("nextindex " + nextIndex);
         if (!canSlide) return;
-        nextIntent = (int)intent;
-        if (currentIntent == nextIntent) return;
-        SetAnimateSlide();
-        previousIntent = currentIntent;
-        listPage[nextIntent].gameObject.SetActive(true);
-        listPage[nextIntent].SetNextPosition();
-        listPage[nextIntent].SlideLeft();
-        listPage[currentIntent].SlideLeft(false);
-        currentIntent = nextIntent;
-
-        historyPage.Add(previousIntent);
+        nextIndex = (int)intent;
+        if (currentIndex == nextIndex) return;
+        
+        intentNextSlide = true;
+        previousIndex = currentIndex;
+        nextIntent = listPage[nextIndex];
+        currentIntent = listPage[currentIndex];
+        nextIntent.SetNextPosition();
+        nextIntent.gameObject.SetActive(true);
     }
 
     public void Back()
     {
+
         if (!canSlide) return;
-        if (currentIntent == previousIntent) return;
         if (historyPage.Count <= 0) return;
-        SetAnimateSlide();
-        nextIntent = previousIntent;
-        listPage[historyPage[historyPage.Count - 1]].gameObject.SetActive(true);
-        listPage[historyPage[historyPage.Count - 1]].SetPreviousPosition();
-        listPage[historyPage[historyPage.Count - 1]].SlideRight();
-        listPage[currentIntent].SlideRight(false);
-        currentIntent = previousIntent;
-        historyPage.RemoveAt(historyPage.Count - 1);
+        if (currentIndex == historyPage[historyPage.Count - 1]) return;
+        previousIndex = historyPage[historyPage.Count - 1];
+        Events.instance.OpenLoader_Dispatch();
+        intentNextSlide = false;
+        previousIntent = listPage[previousIndex];
+        currentIntent = listPage[currentIndex];
+        previousIntent.SetPreviousPosition();
+        previousIntent.gameObject.SetActive(true);
     }
 
     #region TestSlide
@@ -63,7 +70,6 @@ public class IntentManager : MonoBehaviour {
     public void PreviousPage()
     {
         Back();
-
     }
 
     #endregion
@@ -77,7 +83,33 @@ public class IntentManager : MonoBehaviour {
         yield return new WaitForSeconds(1);
         canSlide = true;
     }
+
+
+
+
+    #region Event
+    private void OnPageReadyEvent()
+    {
+        Debug.Log("pageready");
+        SetAnimateSlide();
+        if (intentNextSlide)
+        {
+            nextIntent.SlideLeft();
+            currentIntent.SlideLeft(false);
+            currentIndex = nextIndex;
+            historyPage.Add(previousIndex);
+        }
+        else
+        {
+            if (historyPage.Count <= 0) return;
+            previousIntent.SlideRight();
+            currentIntent.SlideRight(false);
+            currentIndex = previousIndex;
+            historyPage.RemoveAt(historyPage.Count - 1); 
+        }
+    } 
+    #endregion
 }
 public enum Intent{
-    Login = 0,Register = 1 , Menu =2
+    Login = 0,Register = 1 ,ForgotPassword = 2, Menu = 3 , Inputaddress = 4
 }
