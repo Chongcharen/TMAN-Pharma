@@ -57,35 +57,19 @@ public class ServiceRequest : MonoBehaviour {
 
         WWWForm form = new WWWForm();
         //form.AddField("email", "chongcharen@hotmail.com");
-       // WWW www = new WWW("http://thewalklifestylemall.com/service/forgotPassword");
+        //WWW www = new WWW("http://thewalklifestylemall.com/service/forgotPassword");
        // form.AddField("username", "admin");
-       // form.AddField("password", "qwerty");
-        WWW www = new WWW("http://codebee.co.th/project/tman/service/forgotPassword");
+        //form.AddField("password", "qwerty");
+		//WWW www = new WWW("http://www.codebee.co.th/project/tman/index.php/service/login",form);
+		WWW www = new WWW("http://www.codebee.co.th/project/tman/service/forgotPassword");
         yield return StartCoroutine(new WWWRequest(www));
-        if (www.isDone)
-        {
-            
-            string old = " { 'success':false,'description':'\u0e44\u0e21\u0e48\u0e1e\u0e1a email \u0e19\u0e35\u0e49'}";
-            string newstring = " { 'success':false,'description:'\u0e44\u0e21\u0e48\u0e1e\u0e1a\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e19\u0e35\u0e49'}";
-            //string oldString = "/*{ "success":false,"description":"\u0e44\u0e21\u0e48\u0e1e\u0e1a email \u0e19\u0e35\u0e49"}*/;
-            //﻿{"success":false,"description":"\u0e44\u0e21\u0e48\u0e1e\u0e1a\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e19\u0e35\u0e49"}
-            //{"success":false,"description":"\u0e44\u0e21\u0e48\u0e1e\u0e1a email \u0e19\u0e35\u0e49"}
-
-            Debug.Log(www.text);
-            ServiceResponse data = JsonMapper.ToObject<ServiceResponse>(www.text);
-            Debug.Log(data.description);
-
-/*
-
-            string convertString = System.Convert.ToString(www.text);
-            Debug.Log(convertString);
-           // Debug.Log(www.text);
-            ServiceResponse response = JsonHelper.FromSingleJson<ServiceResponse>(convertString);
-            Debug.Log(response.description);
-            */
-        }
-
-
+	        if (www.isDone)
+	        {
+	            string old = " {'success':false,'description':'\u0e44\u0e21\u0e48\u0e1e\u0e1a email \u0e19\u0e35\u0e49'}";
+				ServiceResponse test = JsonHelper.FromSingleJson<ServiceResponse> (www.text);
+				//ServiceResponse aaa = JsonUtility.FromJson<ServiceResponse>(www.text); //ใช้ได้ 
+				Debug.Log(test);
+			}
     }
 }
 [System.Serializable]
