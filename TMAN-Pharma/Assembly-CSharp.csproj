@@ -47,14 +47,25 @@
   <ItemGroup>
      <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
+     <Compile Include="Assets\Script\Event\Events.cs" />
      <Compile Include="Assets\Script\Intent\ImplementClass\AbstractIntent.cs" />
      <Compile Include="Assets\Script\Intent\ImplementClass\IPageBehavior.cs" />
      <Compile Include="Assets\Script\Intent\IntentController\MenuLayoutController.cs" />
+     <Compile Include="Assets\Script\Intent\IntentForgotPassword.cs" />
+     <Compile Include="Assets\Script\Intent\IntentInputAddress.cs" />
      <Compile Include="Assets\Script\Intent\IntentLogin.cs" />
      <Compile Include="Assets\Script\Intent\IntentMenu.cs" />
+     <Compile Include="Assets\Script\Intent\IntentRegister.cs" />
+     <Compile Include="Assets\Script\Intent\Popup\AlertPopup.cs" />
+     <Compile Include="Assets\Script\Intent\Popup\ChoicePopup.cs" />
+     <Compile Include="Assets\Script\Intent\Popup\LoaderPopup.cs" />
+     <Compile Include="Assets\Script\Intent\Popup\Popup.cs" />
+     <Compile Include="Assets\Script\Intent\UIController\ScrollviewController.cs" />
      <Compile Include="Assets\Script\Main\AppStart.cs" />
      <Compile Include="Assets\Script\Main\Main.cs" />
+     <Compile Include="Assets\Script\Manager\DataManager.cs" />
      <Compile Include="Assets\Script\Manager\IntentManager.cs" />
+     <Compile Include="Assets\Script\Manager\PopupManager.cs" />
      <Compile Include="Assets\Script\Manager\VariableManager.cs" />
      <Compile Include="Assets\Script\User\IMemberBehavior.cs" />
      <Compile Include="Assets\Script\User\Member.cs" />
@@ -68,6 +79,7 @@
      <Compile Include="Assets\Script\Utility\UIHelper.cs" />
      <Compile Include="Assets\Script\Utility\Utils.cs" />
      <Compile Include="Assets\Script\Utility\share\ScreenshotHandler.cs" />
+     <Compile Include="Assets\Script\WebService\ClassReference.cs" />
      <Compile Include="Assets\Script\WebService\ForgotPassword.cs" />
      <Compile Include="Assets\Script\WebService\ServiceRequest.cs" />
      <Compile Include="Assets\Script\WebService\WWWRequest.cs" />

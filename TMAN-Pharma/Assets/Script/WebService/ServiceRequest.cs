@@ -157,23 +157,6 @@ public class ServiceRequest : MonoBehaviour {
     #endregion
 
 
-<<<<<<< HEAD
-        WWWForm form = new WWWForm();
-        //form.AddField("email", "chongcharen@hotmail.com");
-        //WWW www = new WWW("http://thewalklifestylemall.com/service/forgotPassword");
-       // form.AddField("username", "admin");
-        //form.AddField("password", "qwerty");
-		//WWW www = new WWW("http://www.codebee.co.th/project/tman/index.php/service/login",form);
-		WWW www = new WWW("http://www.codebee.co.th/project/tman/service/forgotPassword");
-        yield return StartCoroutine(new WWWRequest(www));
-	        if (www.isDone)
-	        {
-	            string old = " {'success':false,'description':'\u0e44\u0e21\u0e48\u0e1e\u0e1a email \u0e19\u0e35\u0e49'}";
-				ServiceResponse test = JsonHelper.FromSingleJson<ServiceResponse> (www.text);
-				//ServiceResponse aaa = JsonUtility.FromJson<ServiceResponse>(www.text); //ใช้ได้ 
-				Debug.Log(test);
-			}
-=======
     IEnumerator ServerCallBack<T>(WWW www ,Action<T> callBack)
     {
         Events.instance.OpenLoader_Dispatch();
@@ -229,8 +212,7 @@ public class ServiceRequest : MonoBehaviour {
             ServiceResponse response = JsonHelper.FromSingleJson<ServiceResponse>(www.text);
             Debug.Log(response.description);
         }
-
->>>>>>> 7e18eae42f32346fcbc9af8d0ae4d8ba3e71de46
+	
     }
     IEnumerator Request_Login(string username, string password)
     {
