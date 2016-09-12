@@ -4,13 +4,16 @@ using System.Collections;
 public class VariableManager : MonoBehaviour {
     private static VariableManager instance;
     public Rect screenCanvas;
-    public static VariableManager GetInstance()
+    public static VariableManager GetInstance
     {
-        if(instance == null)
+        get
         {
-            instance = new GameObject("VariableManager").AddComponent<VariableManager>();
+            if (instance == null)
+            {
+                instance = new GameObject("VariableManager").AddComponent<VariableManager>();
 
+            }
+            return instance;
         }
-        return instance;
     }
 }

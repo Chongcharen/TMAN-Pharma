@@ -7,7 +7,7 @@ public class ForgotPassword : MonoBehaviour {
 	public Button b_submit;
 
 	void Start(){
-		b_submit.onClick.AddListener (OnRequestForgetPassword);
+	//	b_submit.onClick.AddListener (OnRequestForgetPassword);
 	}
 	void OnRequestForgetPassword(){
 	
