@@ -42,7 +42,9 @@ public class ServiceRequest : MonoBehaviour {
         StartCoroutine(ServerCallBack<RawMember>(www, data =>
         {
             DataManager.instance.SetMember(data);
-            IntentManager.instance.SetIntent(Intent.Menu);
+           // IntentManager.instance.SetIntent(Intent.Menu);
+				EFE_Base.instance.OpenPalenByIndex(Intent.Menu);
+
         }));
     }
     public void RegisterRequest()

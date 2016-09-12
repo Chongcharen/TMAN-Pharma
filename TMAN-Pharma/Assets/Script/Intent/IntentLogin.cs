@@ -14,7 +14,7 @@ public class IntentLogin : AbstractIntent {
     }
     void Login()
     {
-       ServiceRequest.instance.LoginRequest(username_txt.text,password_txt.text);
+        ServiceRequest.instance.LoginRequest(username_txt.text,password_txt.text);
     }
     void Register()
     {

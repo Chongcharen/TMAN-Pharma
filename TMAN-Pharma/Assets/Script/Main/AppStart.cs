@@ -4,7 +4,7 @@ using System.Collections;
 public class AppStart : MonoBehaviour {
     void Awake()
     {
-        VariableManager.GetInstance.screenCanvas = GameObject.Find("Canvas").GetComponent<RectTransform>().rect;
+        VariableManager.GetInstance.screenCanvas = GameObject.Find("EFE_Canvas").GetComponent<RectTransform>().rect;
     }
     void Start()
     {

@@ -45,12 +45,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EasyFrontEnd\Editor\EFE_BackgroundFade_Editor.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Editor\EFE_Base_Editor.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Editor\EFE_Content_Modifier_Editor.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Editor\EFE_PanelTransition_Editor.cs" />
      <Compile Include="Assets\TextureAtlasSlicer\Editor\TextureAtlasSlicer.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\DOTween\DOTween43.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest.txt" />
      <None Include="Assets\DOTween\DOTween46.xml" />
      <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\EasyFrontEnd\Documentation\Updates.txt" />
      <None Include="Assets\DOTween\DOTween50.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>

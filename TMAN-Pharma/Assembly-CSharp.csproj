@@ -47,6 +47,12 @@
   <ItemGroup>
      <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_BackgroundFade.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_Base.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_ContentModifier.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_PanelTransition.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Scripts\Test01.cs" />
+     <Compile Include="Assets\EasyFrontEnd\Scripts\UtilityScripts\SimpleRotate.cs" />
      <Compile Include="Assets\Script\Event\Events.cs" />
      <Compile Include="Assets\Script\Intent\ImplementClass\AbstractIntent.cs" />
      <Compile Include="Assets\Script\Intent\ImplementClass\IPageBehavior.cs" />
@@ -90,6 +96,7 @@
      <None Include="Assets\Plugins\Android\AndroidManifest.txt" />
      <None Include="Assets\DOTween\DOTween46.xml" />
      <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\EasyFrontEnd\Documentation\Updates.txt" />
      <None Include="Assets\DOTween\DOTween50.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
