@@ -201,7 +201,6 @@ public class EFE_Base: MonoBehaviour {
 	
 	public void OpenOverlayPanel(GameObject panel)
 	{
-        Debug.Log("openoverlaypanel " + panel.name);
 		string panelName = panel.name;
 		currentOverlay = FindPanel(panelName);
 		//print("Current overlay name "+currentOverlay.name);

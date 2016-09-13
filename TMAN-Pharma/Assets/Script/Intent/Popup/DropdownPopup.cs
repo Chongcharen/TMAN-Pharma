@@ -22,7 +22,6 @@ public class DropdownPopup : MonoBehaviour {
 		ClosePopup ();
 	}
 	public void OnSelect(){
-        Debug.Log("onselect");
 		Events.instance.DropdownSelect_Dispatch (target,dropdown.value);
 		ClosePopup ();
 	}

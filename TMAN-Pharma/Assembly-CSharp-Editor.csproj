@@ -51,12 +51,8 @@
      <Compile Include="Assets\EasyFrontEnd\Editor\EFE_PanelTransition_Editor.cs" />
      <Compile Include="Assets\TextureAtlasSlicer\Editor\TextureAtlasSlicer.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
-     <None Include="Assets\DOTween\DOTween43.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest.txt" />
-     <None Include="Assets\DOTween\DOTween46.xml" />
-     <None Include="Assets\DOTween\readme.txt" />
      <None Include="Assets\EasyFrontEnd\Documentation\Updates.txt" />
-     <None Include="Assets\DOTween\DOTween50.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -80,12 +76,6 @@
  </Reference>
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>/Volumes/ProgramHD/Unity Project/TMAN Pharma/project/TMAN-Pharma/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTweenEditor">
- <HintPath>/Volumes/ProgramHD/Unity Project/TMAN Pharma/project/TMAN-Pharma/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
  <Reference Include="LitJson">
  <HintPath>/Volumes/ProgramHD/Unity Project/TMAN Pharma/project/TMAN-Pharma/Assets/Plugins/LitJson.dll</HintPath>
@@ -116,6 +106,12 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>/Volumes/ProgramHD/Unity Project/TMAN Pharma/project/TMAN-Pharma/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Volumes/ProgramHD/Unity Project/TMAN Pharma/project/TMAN-Pharma/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
