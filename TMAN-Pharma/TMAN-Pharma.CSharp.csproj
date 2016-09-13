@@ -96,6 +96,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_BackgroundFade.cs" />
+    <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_Base.cs" />
+    <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_ContentModifier.cs" />
+    <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_PanelTransition.cs" />
+    <Compile Include="Assets\EasyFrontEnd\Scripts\Test01.cs" />
+    <Compile Include="Assets\EasyFrontEnd\Scripts\UtilityScripts\SimpleRotate.cs" />
     <Compile Include="Assets\Script\Event\Events.cs" />
     <Compile Include="Assets\Script\Intent\ImplementClass\AbstractIntent.cs" />
     <Compile Include="Assets\Script\Intent\ImplementClass\IPageBehavior.cs" />
@@ -107,8 +113,10 @@
     <Compile Include="Assets\Script\Intent\IntentRegister.cs" />
     <Compile Include="Assets\Script\Intent\Popup\AlertPopup.cs" />
     <Compile Include="Assets\Script\Intent\Popup\ChoicePopup.cs" />
+    <Compile Include="Assets\Script\Intent\Popup\DropdownPopup.cs" />
     <Compile Include="Assets\Script\Intent\Popup\LoaderPopup.cs" />
     <Compile Include="Assets\Script\Intent\Popup\Popup.cs" />
+    <Compile Include="Assets\Script\Intent\UIController\DropDownController.cs" />
     <Compile Include="Assets\Script\Intent\UIController\ScrollviewController.cs" />
     <Compile Include="Assets\Script\Main\AppStart.cs" />
     <Compile Include="Assets\Script\Main\Main.cs" />
@@ -140,6 +148,7 @@
     <None Include="Assets\DOTween\DOTween50.xml" />
     <None Include="Assets\DOTween\Editor\DOTweenEditor.XML" />
     <None Include="Assets\DOTween\readme.txt" />
+    <None Include="Assets\EasyFrontEnd\Documentation\Updates.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 
 public class EFE_Base: MonoBehaviour {
-	
+
+    public static EFE_Base instance;
 	[Tooltip("The first panel that is displayed at game start")]
 	public  GameObject firstPanel; //the first panel you want to display at game start
 	[Tooltip("Should the first panel use its transition the first time it is displayed?")]
@@ -19,13 +21,13 @@ public class EFE_Base: MonoBehaviour {
 	
 	EFE_PanelTransition panelTransitionScript;
 	EFE_PanelTransition prevPanelTransitionScript ;
-
-	public static EFE_Base instance;
 		
-	void Awake(){
-		instance = this;
-	}
 	// Use this for initialization
+    void Awake()
+    {
+        instance = this;
+        Events.PageReady += OnPageReadyEvent;
+    }
 	void Start () {
 		
 		DontDestroyOnLoad(gameObject);
@@ -41,13 +43,10 @@ public class EFE_Base: MonoBehaviour {
 	void Update () {
 	
 	}
-
-	public void OpenPalenByIndex(Intent index){
-		OpenPanel (panelList [(int)index]);
-	}
-	public void OpenPanel(GameObject panel)
+	
+    public void OpenPanel(GameObject panel)
 	{
-		
+        
 		string panelName=panel.name;
 		//close current panel if applicabale
 		if(currentPanel)
@@ -202,7 +201,7 @@ public class EFE_Base: MonoBehaviour {
 	
 	public void OpenOverlayPanel(GameObject panel)
 	{
-		
+        Debug.Log("openoverlaypanel " + panel.name);
 		string panelName = panel.name;
 		currentOverlay = FindPanel(panelName);
 		//print("Current overlay name "+currentOverlay.name);
@@ -220,12 +219,43 @@ public class EFE_Base: MonoBehaviour {
 		
 		
 	}
-	
-	
-	
-	//Util functions
-	
-	public void OpenUrl(string url)
+
+    //more edit
+    private int nextIndex;
+    private int previousIndex = 0;
+    private List<int> historyIntent = new List<int>();
+    
+    public void OpenPanelByIndex(Intent index)
+    {
+        nextIndex = (int)index;
+        historyIntent.Add(previousIndex);
+        previousIndex = nextIndex;
+        currentPanel.GetComponent<EFE_PanelTransition>().transitionOutType = EFE_PanelTransition.TransitionTypeOut.SlideOutToLeft;
+        panelList[nextIndex].GetComponent<EFE_PanelTransition>().transitionInType = EFE_PanelTransition.TransitionType.SlideInFromRight;
+        panelList[nextIndex].SetActive(true);
+    }
+    public void OpenPreviousIntent()
+    {
+        if (historyIntent.Count <= 0) return;
+        nextIndex = historyIntent[historyIntent.Count - 1];
+        currentPanel.GetComponent<EFE_PanelTransition>().transitionOutType = EFE_PanelTransition.TransitionTypeOut.SlideOutToRight;
+        panelList[nextIndex].GetComponent<EFE_PanelTransition>().transitionInType = EFE_PanelTransition.TransitionType.SlideInFromLeft;
+        panelList[nextIndex].SetActive(true);
+        historyIntent.RemoveAt(historyIntent.Count -1);
+       
+        previousIndex = nextIndex;
+    }
+    void OnPageReadyEvent()
+    {
+        OpenPanel(panelList[nextIndex]);
+    }
+
+
+
+
+    //Util functions
+
+    public void OpenUrl(string url)
 	{
 		Application.OpenURL(url);
 	}

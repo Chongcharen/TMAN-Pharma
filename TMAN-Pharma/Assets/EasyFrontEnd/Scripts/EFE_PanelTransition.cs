@@ -84,12 +84,9 @@ public class EFE_PanelTransition : MonoBehaviour {
 			print("Centered pivot");
 		}
 		
-		Events.PageReady += OnPageReadyEvent;
+		
 	}
-
-	void OnPageReadyEvent(){
-
-	}
+	
 	void Update () 
 	{
 	

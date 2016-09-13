@@ -56,7 +56,7 @@ public class AbstractIntent : MonoBehaviour,IPageBehavior {
     }
     void OnBack()
     {
-        IntentManager.instance.Back();
+        EFE_Base.instance.OpenPreviousIntent();
     }
 
 

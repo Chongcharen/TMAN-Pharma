@@ -43,7 +43,7 @@ public class ServiceRequest : MonoBehaviour {
         {
             DataManager.instance.SetMember(data);
            // IntentManager.instance.SetIntent(Intent.Menu);
-				EFE_Base.instance.OpenPalenByIndex(Intent.Menu);
+			EFE_Base.instance.OpenPanelByIndex(Intent.Menu);
 
         }));
     }
@@ -161,13 +161,15 @@ public class ServiceRequest : MonoBehaviour {
 
     IEnumerator ServerCallBack<T>(WWW www ,Action<T> callBack)
     {
-        Events.instance.OpenLoader_Dispatch();
         yield return StartCoroutine(new WWWRequest(www));
         if (www.isDone){
-            Debug.Log(www.text);
             ServiceResponse response = JsonHelper.FromSingleJson<ServiceResponse>(www.text);
-            T wrapper = JsonHelper.FromSingleJson<T>(www.text);
-            callBack(wrapper);
+            if (response.success)
+            {
+                T wrapper = JsonHelper.FromSingleJson<T>(www.text);
+                callBack(wrapper);
+            }
+            
         }
        
     }
@@ -186,6 +188,7 @@ public class ServiceRequest : MonoBehaviour {
             {
                 Debug.Log("โหลดข้อมูลไม่ได้ " + e.Message);
             }
+
         }
     }
     #region Request แบบเก่า

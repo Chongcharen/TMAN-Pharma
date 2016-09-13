@@ -14,7 +14,8 @@ public class IntentLogin : AbstractIntent {
     }
     void Login()
     {
-        ServiceRequest.instance.LoginRequest(username_txt.text,password_txt.text);
+         ServiceRequest.instance.LoginRequest(username_txt.text,password_txt.text);
+       // EFE_Base.instance.OpenPanel(EFE_Base.instance.panelList[1]);
     }
     void Register()
     {

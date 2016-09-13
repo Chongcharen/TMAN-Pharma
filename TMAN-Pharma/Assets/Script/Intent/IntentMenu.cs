@@ -11,7 +11,8 @@ public class IntentMenu : AbstractIntent{
     Button b_order, b_product, b_profile, b_relations, b_comment, b_contentment, b_luckydraw, b_promotion, b_directions, b_inputaddress, b_checkin;
     void OpenInputAddressIntent()
     {
-        IntentManager.instance.SetIntent(Intent.Inputaddress);
+        //IntentManager.instance.SetIntent(Intent.Inputaddress);
+        EFE_Base.instance.OpenPanelByIndex(Intent.Inputaddress);
     }
 
 

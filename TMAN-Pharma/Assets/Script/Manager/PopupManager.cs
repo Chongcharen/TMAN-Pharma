@@ -7,7 +7,7 @@ public class PopupManager : MonoBehaviour {
     public GameObject screen,screenDropdown;
     public GameObject loader;
 
-	public Dropdown dropdownPopup;
+	public DropdownPopup dropdownPopup;
     void Awake()
     {
         Events.OpenLoader += OpenLoader;
@@ -30,8 +30,8 @@ public class PopupManager : MonoBehaviour {
 
 	void Events_LoadInstanceDropdown (Dropdown target)
 	{
-		screenDropdown.SetActive (true);
-		screenDropdown.GetComponent<DropdownPopup> ().DropdownUpdate(target);
+		//screenDropdown.SetActive (true);
+		dropdownPopup.DropdownUpdate(target);
 		//dropdownPopup.ClearOptions ();
 
 

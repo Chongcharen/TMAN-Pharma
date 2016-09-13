@@ -19,7 +19,7 @@ public class IntentManager : MonoBehaviour {
     {
         instance = this;
         historyPage = new List<int>();
-        Events.PageReady += OnPageReadyEvent;
+       // Events.PageReady += OnPageReadyEvent;
         
     }
     void Start()
@@ -43,7 +43,7 @@ public class IntentManager : MonoBehaviour {
         nextIntent.gameObject.SetActive(true);
     }
 
-    public void Back()
+   /* public void Back()
     {
 
         if (!canSlide) return;
@@ -56,6 +56,19 @@ public class IntentManager : MonoBehaviour {
         currentIntent = listPage[currentIndex];
         previousIntent.SetPreviousPosition();
         previousIntent.gameObject.SetActive(true);
+    }*/
+    public void AddHistoryIntent(int index)
+    {
+        historyPage.Add(index);
+    }
+    public void Back()
+    {
+        Debug.Log(historyPage.Count);
+        if (historyPage.Count <= 0) return;
+       // Debug.Log((Intent)historyPage[historyPage.Count - 1]);
+        EFE_Base.instance.OpenPanelByIndex((Intent)historyPage[historyPage.Count - 1]);
+        historyPage.RemoveAt(historyPage.Count - 1);
+        //Debug.Log("aaa");
     }
 
     #region TestSlide
