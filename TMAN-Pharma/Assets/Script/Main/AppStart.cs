@@ -8,6 +8,7 @@ public class AppStart : MonoBehaviour {
     }
     void Start()
     {
+        ServiceRequest.instance.GetPlaceRequest();
         //ServiceRequest.instance.LoginRequest("test", "12345678");
        // ServiceRequest.instance.RegisterRequest();
         //ServiceRequest.instance.ForgorPasswordRequest("aaa@aaa.aaa");

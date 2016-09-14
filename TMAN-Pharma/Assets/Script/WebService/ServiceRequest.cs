@@ -138,6 +138,18 @@ public class ServiceRequest : MonoBehaviour {
         }));
     }
 
+    //place_id,pos_latitude,pos_longitude,image_path
+    public void GetPlaceRequest()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("code_store", "ST0211223");
+        WWW www = new WWW(GetUrlRequest("getPlaceBYCode"), form);
+        StartCoroutine(ServerCallBack<ServiceResponse>(www, resp =>
+        {
+            Debug.Log(resp.success);
+        }));
+    }
+
     public void GetAllProvince()
     {
         WWW www = new WWW(GetUrlRequest("getAllProvince"));
@@ -163,17 +175,21 @@ public class ServiceRequest : MonoBehaviour {
     {
         yield return StartCoroutine(new WWWRequest(www));
         if (www.isDone){
+            Debug.Log(www.text);
             ServiceResponse response = JsonHelper.FromSingleJson<ServiceResponse>(www.text);
             if (response.success)
             {
                 T wrapper = JsonHelper.FromSingleJson<T>(www.text);
                 callBack(wrapper);
             }
+            else
+            {
+                Debug.Log(response.description);
+            }
             
         }
        
     }
-
     IEnumerator ServerCallBackToList<T>(WWW www, Action<List<T>> callBack)
     {
         yield return StartCoroutine(new WWWRequest(www));

@@ -71,16 +71,7 @@
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>Assets\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>Assets\DOTween\DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>Assets\DOTween\DOTween46.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>Assets\DOTween\DOTween50.dll</HintPath>
+      <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="LitJson">
       <HintPath>Assets\Plugins\LitJson.dll</HintPath>
@@ -96,12 +87,162 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_BackgroundFade.cs" />
     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_Base.cs" />
     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_ContentModifier.cs" />
     <Compile Include="Assets\EasyFrontEnd\Scripts\EFE_PanelTransition.cs" />
     <Compile Include="Assets\EasyFrontEnd\Scripts\Test01.cs" />
     <Compile Include="Assets\EasyFrontEnd\Scripts\UtilityScripts\SimpleRotate.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\BingMapsLocationAPIExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\CacheTilesExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\CalcAreaExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ChangeMapTextureExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ChangeMarkerTextureExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ChangePositionAndZoomEventsExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ChangePositionUsingGyro.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ChangeProviderAndTypeExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\CheckIntenetConnectionExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ControlDataTrafficExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\CustomDownloadTileExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\DetectWaterByTextureExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\DistanceAndDirectionExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\DottedLineExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\DragMarkerAndTranslateMapExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\DragMarkerByLongPressExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\DrawingAPI_Example.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\DrawingElementEventsExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\FindAutocompleteExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\FindDirectionExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\FindLocationExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\FindLocationNameExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\FindPlacesExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\GPXExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\GetCenterPointOfMarkersExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\GetElevationExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\GroupMarkersExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\HereRoutingAPIExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\InertiaExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\InterceptElevationRequestExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\InterceptInputExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\LockPositionAndZoomExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\Marker3D_Example.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\Marker3D_GPS_Example.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\MarkerClickCountExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\MarkerClickExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\MarkerCustomDataExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\MarkerScaleByZoomExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\Marker_GPS_Example.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ModifyTooltipStyleExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\MoveMarkerOnRouteExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\MoveMarkersExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\NGUI\NGUICustomMarkerExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\NGUI\NGUICustomMarkerSystemExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\NGUI\NGUICustomTooltipExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\OSMRequestExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\OnDrawTooltipExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\OnHoverExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\OpenRouteServiceExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\RealTilesetSizeExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ResetCameraRotationExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\RotateCameraByCompassExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\RotateMapInsteadMarkerExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\SaveMapStateExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\SaveMarker3DExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\SaveMarkersExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ScreenToGeoExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\ShowMarkerLabelsByZoomExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\SmoothMoveExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\TilesetMapTilerOverlayExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\TilesetMarkerDepthExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\TilesetOverlayExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\TooltipWithoutBackgroundExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\UpdateZoomOnSmoothZoomProcessExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\uGUI\uGUICustomMarkerEngineExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\uGUI\uGUICustomMarkerExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\uGUI\uGUICustomTooltipExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\uGUI\uGUICustomTooltipForAllMarkersExample.cs" />
+    <Compile Include="Assets\Online maps\Examples (API usage)\uGUI\uGUISmoothZoomExample.cs" />
+    <Compile Include="Assets\Online maps\Examples\Scripts\Aircraft.cs" />
+    <Compile Include="Assets\Online maps\Examples\Scripts\AircraftWarning.cs" />
+    <Compile Include="Assets\Online maps\Examples\Scripts\Demo.cs" />
+    <Compile Include="Assets\Online maps\Examples\Scripts\ExampleGUI.cs" />
+    <Compile Include="Assets\Online maps\Examples\Scripts\GUITextureSize.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsControlBase.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsControlBase2D.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsControlBase3D.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsDFGUITextureControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsGUITextureControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsIGUITextureControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsNGUITextureControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsSpriteRendererControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsTextureControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsTileSetControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsUIImageControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Controls\OnlineMapsUIRawImageControl.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Drawing\OnlineMapsDrawingElement.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Drawing\OnlineMapsDrawingLine.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Drawing\OnlineMapsDrawingPoly.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Drawing\OnlineMapsDrawingRect.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsBingMapsLocation.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsFindAutocomplete.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsFindDirection.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsFindDirectionAdvanced.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsFindLocation.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsFindPlaceDetails.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsFindPlaces.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsGetElevation.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsGoogleAPIQuery.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsHereRoutingAPI.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsOSMAPIQuery.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsOSMNominatim.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\OnlineMapsOpenRouteService.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsBingMapsLocationResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsFindAutocompleteResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsFindDirectionResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsFindLocationResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsFindPlaceDetailsResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsFindPlacesResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsGetElevationResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsHereRoutingAPIResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\GoogleAPI\Results\OnlineMapsOSMNominatimResult.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Markers\OnlineMapsMarker.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Markers\OnlineMapsMarker3D.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Markers\OnlineMapsMarker3DInstance.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Markers\OnlineMapsMarkerBase.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Markers\OnlineMapsMarkerBillboard.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Markers\OnlineMapsMarkerInstanceBase.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMaps.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsBuffer.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsEnums.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsPositionRange.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsProvider.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsRange.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsThreadManager.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsThreadWINRT.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsTile.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsUtils.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsVector2i.cs" />
+    <Compile Include="Assets\Online maps\Scripts\OnlineMapsWWW.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\Buildings\OnlineMapsBuildingBase.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\Buildings\OnlineMapsBuildingBuiltIn.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\Buildings\OnlineMapsBuildingMaterial.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\Buildings\OnlineMapsBuildings.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\JSLoader\OnlineMapsJSLoader.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\OnlineMapsDirectionStep.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\OnlineMapsGPXObject.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\OnlineMapsJPEGDecoder.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\OnlineMapsLocationService.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Plugins\OnlineMapsRWTConnector.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Projections\OnlineMapsProjection.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Projections\OnlineMapsProjectionSphericalMercator.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Projections\OnlineMapsProjectionWGS84.cs" />
+    <Compile Include="Assets\Online maps\Scripts\XML\OnlineMapsXML.cs" />
+    <Compile Include="Assets\Online maps\Scripts\XML\OnlineMapsXMLEnum.cs" />
+    <Compile Include="Assets\Online maps\Scripts\XML\OnlineMapsXMLList.cs" />
+    <Compile Include="Assets\Online maps\Scripts\XML\OnlineMapsXMLListEnum.cs" />
+    <Compile Include="Assets\Online maps\Scripts\XML\OnlineMapsXMLNamespaceManager.cs" />
     <Compile Include="Assets\Script\Event\Events.cs" />
     <Compile Include="Assets\Script\Intent\ImplementClass\AbstractIntent.cs" />
     <Compile Include="Assets\Script\Intent\ImplementClass\IPageBehavior.cs" />
@@ -117,6 +258,7 @@
     <Compile Include="Assets\Script\Intent\Popup\LoaderPopup.cs" />
     <Compile Include="Assets\Script\Intent\Popup\Popup.cs" />
     <Compile Include="Assets\Script\Intent\UIController\DropDownController.cs" />
+    <Compile Include="Assets\Script\Intent\UIController\GenericDropdown.cs" />
     <Compile Include="Assets\Script\Intent\UIController\ScrollviewController.cs" />
     <Compile Include="Assets\Script\Main\AppStart.cs" />
     <Compile Include="Assets\Script\Main\Main.cs" />
@@ -142,13 +284,13 @@
     <Compile Include="Assets\Script\WebService\WWWRequest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\DOTween\DOTween.XML" />
-    <None Include="Assets\DOTween\DOTween43.xml" />
-    <None Include="Assets\DOTween\DOTween46.xml" />
-    <None Include="Assets\DOTween\DOTween50.xml" />
-    <None Include="Assets\DOTween\Editor\DOTweenEditor.XML" />
-    <None Include="Assets\DOTween\readme.txt" />
+    <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\EasyFrontEnd\Documentation\Updates.txt" />
+    <None Include="Assets\Online maps\Shaders\TilesetCutoutShader.shader" />
+    <None Include="Assets\Online maps\Shaders\TilesetDrawingElement.shader" />
+    <None Include="Assets\Online maps\Shaders\TilesetShader.shader" />
     <None Include="Assets\Plugins\Android\AndroidManifest.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

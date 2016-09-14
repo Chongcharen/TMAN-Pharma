@@ -113,19 +113,10 @@
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>Assets\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>Assets\DOTween\DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>Assets\DOTween\DOTween46.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>Assets\DOTween\DOTween50.dll</HintPath>
+      <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
-      <HintPath>Assets\DOTween\Editor\DOTweenEditor.dll</HintPath>
+      <HintPath>Assets\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
     </Reference>
     <Reference Include="LitJson">
       <HintPath>Assets\Plugins\LitJson.dll</HintPath>
@@ -151,16 +142,41 @@
     <Compile Include="Assets\EasyFrontEnd\Editor\EFE_Base_Editor.cs" />
     <Compile Include="Assets\EasyFrontEnd\Editor\EFE_Content_Modifier_Editor.cs" />
     <Compile Include="Assets\EasyFrontEnd\Editor\EFE_PanelTransition_Editor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsControlBase2DEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsControlBase3DEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsControlBaseEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsDFGUITextureControlEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsGUITextureControlEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsIGUITextureControlEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsNGUITextureControlEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsTextureControlEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Controls\OnlineMapsTilesetControlEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\OnlineMapsAboutWindow.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\OnlineMapsEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\OnlineMapsImporter.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\OnlineMapsPackageManager.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\OnlineMapsPrefs.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\OnlineMapsUpdater.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\OnlineMapsWizard.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Plugins\OnlineMapsBuildingBaseEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Plugins\OnlineMapsBuildingsEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Plugins\OnlineMapsJSLoaderEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Plugins\OnlineMapsLocationServiceEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\Plugins\OnlineMapsRWTConnectorEditor.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\PropertyDrawers\OnlineMapsBuildingMaterialPropertyDrawer.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\PropertyDrawers\OnlineMapsMarker3DPropertyDrawer.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\PropertyDrawers\OnlineMapsMarkerPropertyDrawer.cs" />
+    <Compile Include="Assets\Online maps\Scripts\Editor\PropertyDrawers\OnlineMapsRangePropertyDrawer.cs" />
     <Compile Include="Assets\TextureAtlasSlicer\Editor\TextureAtlasSlicer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\DOTween\DOTween.XML" />
-    <None Include="Assets\DOTween\DOTween43.xml" />
-    <None Include="Assets\DOTween\DOTween46.xml" />
-    <None Include="Assets\DOTween\DOTween50.xml" />
-    <None Include="Assets\DOTween\Editor\DOTweenEditor.XML" />
-    <None Include="Assets\DOTween\readme.txt" />
+    <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\EasyFrontEnd\Documentation\Updates.txt" />
+    <None Include="Assets\Online maps\Shaders\TilesetCutoutShader.shader" />
+    <None Include="Assets\Online maps\Shaders\TilesetDrawingElement.shader" />
+    <None Include="Assets\Online maps\Shaders\TilesetShader.shader" />
     <None Include="Assets\Plugins\Android\AndroidManifest.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
