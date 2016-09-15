@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Service.ClassReference;
 public class Events : MonoBehaviour {
     public delegate void PageReadyEvent();
     public static event PageReadyEvent PageReady;
@@ -14,6 +15,9 @@ public class Events : MonoBehaviour {
 
 	public delegate void DropdownSelectEvent(Dropdown dropdown,int index);
 	public static event DropdownSelectEvent DropdownSelect;
+
+    public delegate void LoadPlaceCompleteEvent(Place place);
+    public static event LoadPlaceCompleteEvent LoadPlaceComplete;
 
     public static Events instance;
 
@@ -37,4 +41,9 @@ public class Events : MonoBehaviour {
 	public void DropdownSelect_Dispatch(Dropdown target,int index){
 		DropdownSelect (target,index);
 	}
+
+    public void LoadPlace_Dispatch(Place place)
+    {
+        LoadPlaceComplete(place);
+    }
 }

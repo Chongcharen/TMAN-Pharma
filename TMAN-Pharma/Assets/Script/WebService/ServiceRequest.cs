@@ -139,11 +139,30 @@ public class ServiceRequest : MonoBehaviour {
     }
 
     //place_id,pos_latitude,pos_longitude,image_path
-    public void GetPlaceRequest()
+    public void GetPlaceRequest(string code_store)
     {
         WWWForm form = new WWWForm();
-        form.AddField("code_store", "ST0211223");
+        form.AddField("code_store",code_store);
         WWW www = new WWW(GetUrlRequest("getPlaceBYCode"), form);
+        StartCoroutine(ServerCallBackToList<Place>(www, resp =>
+        {
+            if (resp[0] != null)
+            {
+                Events.instance.LoadPlace_Dispatch((Place)resp[0]);
+            }
+        }));
+    }
+
+    /*
+     {place_id,pos_latitude,pos_longitude,image_path}*/
+    public void SavePlaceRequest(int place_id,double pos_latitude,double pos_longitude,byte[] image_path,string filename)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("place_id", place_id);
+        form.AddField("pos_latitude", pos_latitude.ToString());
+        form.AddField("pos_longitude", pos_longitude.ToString());
+        form.AddBinaryData("image_path", image_path, filename);
+        WWW www = new WWW(GetUrlRequest("getPosition_Save"), form);
         StartCoroutine(ServerCallBack<ServiceResponse>(www, resp =>
         {
             Debug.Log(resp.success);

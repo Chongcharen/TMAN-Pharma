@@ -93,4 +93,27 @@ namespace Service.ClassReference
     }
 
 
+
+    /*
+     * [{"place_id":"1","place_name":"CodeBee","sername":"Thiti Miangmook",
+     * "code_store":"ST0211223","code_offset":"","place_tel":"029825410",
+     * "place_address":"19\/5 \u0e2b\u0e21\u0e39\u0e484","store_id":"1","group_id":"1",
+     * "province_id":"1","timestamp":"2016-09-06 15:59:36"}]
+     */
+    [Serializable]
+    public class Place
+    {
+        public int place_id;
+        public string place_name;
+        public string sername;
+        public string code_store;
+        public string code_offset;
+        public string place_tel;
+        public string place_address;
+        public int store_id;
+        public int group_id;
+        public int province_id;
+        public string timestamp;
+
+    }
 }
