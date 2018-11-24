@@ -1384,6 +1384,17 @@ public static class OnlineMapsUtils
         return Math.Sqrt((p2x - p1x) * (p2x - p1x) + (p2y - p1y) * (p2y - p1y));
     }
 
+    [Obsolete]
+    public static void MercatToLatLong(double mx, double my, out double x, out double y)
+    {
+        uint mapSize = (uint)tileSize << 20;
+        double px = Clip(mx * mapSize + 0.5, 0, mapSize - 1);
+        double py = Clip(my * mapSize + 0.5, 0, mapSize - 1);
+        mx = px / tileSize;
+        my = py / tileSize;
+        TileToLatLong(mx, my, 20, out x, out y);
+    }
+
     public static Vector2 NearestPointStrict(Vector2 point, Vector2 lineStart, Vector2 lineEnd)
     {
         Vector2 fullDirection = lineEnd - lineStart;

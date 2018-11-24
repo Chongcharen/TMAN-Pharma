@@ -86,6 +86,8 @@ public class OnlineMapsOpenRouteService : OnlineMapsTextWebService
 
         public virtual void Append(StringBuilder builder)
         {
+            if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.OpenRouteService();
+
             builder.Append("api_key=").Append(key);
             if (!string.IsNullOrEmpty(id)) builder.Append("&id=").Append(id);
         }

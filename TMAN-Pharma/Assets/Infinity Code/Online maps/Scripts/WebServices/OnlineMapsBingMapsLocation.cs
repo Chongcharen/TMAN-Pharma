@@ -14,6 +14,8 @@ public class OnlineMapsBingMapsLocation: OnlineMapsTextWebService
 {
     private OnlineMapsBingMapsLocation(string query, string key, int maxResults, bool includeNeighborhood)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.BingMaps();
+
         _status = OnlineMapsQueryStatus.downloading;
         StringBuilder url = new StringBuilder();
         url.AppendFormat("https://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}&o=xml", OnlineMapsWWW.EscapeURL(query), key);
@@ -25,6 +27,8 @@ public class OnlineMapsBingMapsLocation: OnlineMapsTextWebService
 
     private OnlineMapsBingMapsLocation(Vector2 point, string key, bool includeNeighborhood)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.BingMaps();
+
         _status = OnlineMapsQueryStatus.downloading;
         StringBuilder url = new StringBuilder();
         url.AppendFormat("https://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}&o=xml", point.y + "," + point.x, key);

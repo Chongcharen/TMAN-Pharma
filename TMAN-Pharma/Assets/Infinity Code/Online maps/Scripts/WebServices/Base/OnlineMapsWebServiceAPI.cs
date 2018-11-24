@@ -18,8 +18,14 @@ public abstract class OnlineMapsWebServiceAPI
     /// </summary>
     public Action<OnlineMapsWebServiceAPI> OnFinish;
 
+    /// <summary>
+    /// Event that occurs when a success response is received from webservice.
+    /// </summary>
     public Action<OnlineMapsWebServiceAPI> OnSuccess;
 
+    /// <summary>
+    /// Event that occurs when an error response is received from webservice.
+    /// </summary>
     public Action<OnlineMapsWebServiceAPI> OnFailed;
 
     /// <summary>
@@ -27,7 +33,14 @@ public abstract class OnlineMapsWebServiceAPI
     /// </summary>
     public object customData;
 
+    /// <summary>
+    /// Status of the request
+    /// </summary>
     protected OnlineMapsQueryStatus _status;
+
+    /// <summary>
+    /// Instance of request
+    /// </summary>
     protected OnlineMapsWWW www;
 
     /// <summary>

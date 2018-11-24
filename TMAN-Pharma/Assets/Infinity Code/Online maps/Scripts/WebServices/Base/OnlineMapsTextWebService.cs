@@ -4,18 +4,28 @@
 using System;
 
 /// <summary>
-/// The base class for working with the web services returns text response.
+/// The base class for working with the web services returns text response
 /// </summary>
 public abstract class OnlineMapsTextWebService: OnlineMapsWebServiceAPI
 {
     /// <summary>
-    /// Event that occurs when a response is received from webservice.
+    /// Event that occurs when a response is received from webservice
     /// </summary>
     public Action<string> OnComplete;
 
+    /// <summary>
+    /// Event that occurs when a success response is received from webservice
+    /// </summary>
     public new Action<OnlineMapsTextWebService> OnSuccess;
+
+    /// <summary>
+    /// Event that occurs when an error response is received from webservice
+    /// </summary>
     public new Action<OnlineMapsTextWebService> OnFailed;
 
+    /// <summary>
+    /// Response string
+    /// </summary>
     protected string _response;
 
     /// <summary>
@@ -56,7 +66,6 @@ public abstract class OnlineMapsTextWebService: OnlineMapsWebServiceAPI
             _status = string.IsNullOrEmpty(www.error) ? OnlineMapsQueryStatus.success : OnlineMapsQueryStatus.error;
             _response = _status == OnlineMapsQueryStatus.success ? www.text : www.error;
 
-            UnityEngine.Debug.Log("OnComplete " + OnComplete);
             if (OnComplete != null) OnComplete(_response);
             if (status == OnlineMapsQueryStatus.success)
             {

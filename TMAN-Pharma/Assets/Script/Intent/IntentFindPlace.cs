@@ -47,5 +47,7 @@ public class IntentFindPlace : AbstractIntent {
     {
 		DataManager.instance.isFindDirection = true;
         ServiceRequest.instance.SearchPlaceRequest(province[dropdown_province.value].PROVINCE_ID, input_place_id.text);
+
+
     }
 }

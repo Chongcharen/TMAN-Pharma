@@ -551,7 +551,9 @@ public class OnlineMapsBuffer
         int maxX = 1 << bufferZoom;
 
         bool isEntireWorld = api.width == maxX * s;
-        if (isEntireWorld)
+        bool isBiggestThatBuffer = api.width + 512 == maxX * s;
+
+        if (isEntireWorld || isBiggestThatBuffer)
         {
             
         }
@@ -616,6 +618,31 @@ public class OnlineMapsBuffer
             }
         }
 
+        if (isEntireWorld)
+        {
+            ip.x -= api.width;
+            for (int y = 0; y < marker.height; y++)
+            {
+                if (disposed) return;
+                if (ip.y + y < 0 || ip.y + y >= height) continue;
+
+                int cy = (markerHeight - y - 1) * markerWidth;
+
+                for (int x = 0; x < marker.width; x++)
+                {
+                    if (ip.x + x < 0 || ip.x + x >= width) continue;
+
+                    try
+                    {
+                        SetColorToBuffer(markerColors[cy + x], ip, y, x);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
+
         marker.locked = false;
     }
 
@@ -675,6 +702,8 @@ public class OnlineMapsBuffer
 
     private bool UpdateBackBuffer(double px, double py, int zoom, bool fullRedraw)
     {
+        int max = 1 << zoom;
+
         const int s = OnlineMapsUtils.tileSize;
         int countX = api.width / s + 2;
         int countY = api.height / s + 2;
@@ -683,10 +712,8 @@ public class OnlineMapsBuffer
         api.projection.CoordinatesToTile(px, py, zoom, out cx, out cy);
         OnlineMapsVector2i pos = new OnlineMapsVector2i((int)cx - countX / 2, (int)cy - countY / 2);
 
-        int maxY = 1 << zoom;
-
         if (pos.y < 0) pos.y = 0;
-        if (pos.y >= maxY - countY) pos.y = maxY - countY;
+        if (pos.y >= max - countY) pos.y = max - countY;
 
         if (api.target == OnlineMapsTarget.texture)
         {
@@ -719,7 +746,7 @@ public class OnlineMapsBuffer
         {
             for (int i = 0; i < OnlineMapsTile.tiles.Count; i++) OnlineMapsTile.tiles[i].used = false;
 
-            InitTiles(zoom, countX, pos, countY, maxY, newBaseTiles);
+            InitTiles(zoom, countX, pos, countY, max, newBaseTiles);
 
             if (!api.useCurrentZoomTiles)
             {

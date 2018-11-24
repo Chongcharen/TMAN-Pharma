@@ -31,15 +31,15 @@ public class OnlineMapsBuildings : MonoBehaviour
     public Action<OnlineMapsBuildingBase> OnBuildingDispose;
 
     /// <summary>
+    /// This event allows you to intercept the calculation of the center point of the building, and return your own center point.
+    /// </summary>
+    public Func<List<Vector3>, Vector3> OnCalculateBuildingCenter;
+
+    /// <summary>
     /// This event is triggered before create a building. \n
     /// Return TRUE - if you want to create this building, FALSE - avoid creating this building.
     /// </summary>
     public Predicate<OnlineMapsBuildingsNodeData> OnCreateBuilding;
-
-    /// <summary>
-    /// The event, which occurs when the new building was received.
-    /// </summary>
-    public Action OnNewBuildingsReceived;
 
     /// <summary>
     /// This event is fired when the height of the building is unknown.\n
@@ -47,6 +47,16 @@ public class OnlineMapsBuildings : MonoBehaviour
     /// Return - the height of buildings.
     /// </summary>
     public Func<OnlineMapsOSMWay, float> OnGenerateBuildingHeight;
+
+    /// <summary>
+    /// The event, which occurs when the new building was received.
+    /// </summary>
+    public Action OnNewBuildingsReceived;
+
+    /// <summary>
+    /// This event is triggered when preparing to create a building, and allows you to make the necessary changes and additions to the way and used nodes.
+    /// </summary>
+    public Action<OnlineMapsOSMWay, List<OnlineMapsOSMNode>> OnPrepareBuildingCreation;
 
     /// <summary>
     /// This event is called when creating a request to OSM Overpass API.
@@ -63,6 +73,9 @@ public class OnlineMapsBuildings : MonoBehaviour
     /// </summary>
     public Action OnRequestComplete;
 
+    /// <summary>
+    /// The event, which occurs when the request is failed.
+    /// </summary>
     public Action OnRequestFailed;
 
     /// <summary>
@@ -134,6 +147,8 @@ public class OnlineMapsBuildings : MonoBehaviour
     /// </summary>
     public int maxBuilding = 0;
 
+    public OnlineMapsOSMAPIQuery osmRequest;
+
     /// <summary>
     /// Use the Color tag for buildings?
     /// </summary>
@@ -148,7 +163,6 @@ public class OnlineMapsBuildings : MonoBehaviour
     private bool sendBuildingsReceived = false;
     private string requestData;
     private float lastRequestTime;
-    private OnlineMapsOSMAPIQuery osmRequest;
 
     private double prevUpdateTLX;
     private double prevUpdateTLY;
@@ -255,6 +269,32 @@ public class OnlineMapsBuildings : MonoBehaviour
         return hasNewBuildings;
     }
 
+    public void LoadBuildingsFromOSM(string osmData)
+    {
+        Action action = () =>
+        {
+            Dictionary<string, OnlineMapsOSMNode> nodes;
+            Dictionary<string, OnlineMapsOSMWay> ways;
+            List<OnlineMapsOSMRelation> relations;
+
+            OnlineMapsOSMAPIQuery.ParseOSMResponseFast(osmData, out nodes, out ways, out relations);
+
+            lock (newBuildingsData)
+            {
+                MoveRelationsToWays(relations, ways, nodes);
+            }
+
+            sendBuildingsReceived = true;
+        };
+
+#if !UNITY_WEBGL
+        if (map.renderInThread) OnlineMapsThreadManager.AddThreadAction(action);
+        else action();
+#else
+        action();
+#endif
+    }
+
     private void MoveRelationToWay(OnlineMapsOSMRelation relation, Dictionary<string, OnlineMapsOSMWay> ways, List<string> waysInRelation, Dictionary<string, OnlineMapsOSMNode> nodes)
     {
         if (relation.members.Count == 0) return;
@@ -351,28 +391,7 @@ public class OnlineMapsBuildings : MonoBehaviour
             return;
         }
 
-        Action action = () =>
-        {
-            Dictionary<string, OnlineMapsOSMNode> nodes;
-            Dictionary<string, OnlineMapsOSMWay> ways;
-            List<OnlineMapsOSMRelation> relations;
-
-            OnlineMapsOSMAPIQuery.ParseOSMResponseFast(response, out nodes, out ways, out relations);
-
-            lock (newBuildingsData)
-            {
-                MoveRelationsToWays(relations, ways, nodes);
-            }
-
-            sendBuildingsReceived = true;
-        };
-
-#if !UNITY_WEBGL
-        if (map.renderInThread) OnlineMapsThreadManager.AddThreadAction(action);
-        else action();
-#else
-        action();
-#endif
+        LoadBuildingsFromOSM(response);
 
         if (OnRequestComplete != null) OnRequestComplete();
     }

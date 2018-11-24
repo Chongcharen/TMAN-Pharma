@@ -32,21 +32,21 @@ public class FindDirection : MonoBehaviour {
 		yield return new WaitForSeconds (0.03f);
 
 
-			LatLongPosition position = DataManager.instance.latlongList.Find(p => p.place_id == DataManager.instance.placeSelect.place_id );
-        Debug.Log("StartfindDirection " + position);
-		if (position == null) {
-			lat = DataManager.instance.placeSelect.pos_latitude;
-			lng = DataManager.instance.placeSelect.pos_longitude;
-		} else {
-			lat = position.pos_latitude;
-			lng = position.pos_longitude;
-		}
-			Vector2 posLatlng = new Vector2((float)lat,(float)lng);
-			OnlineMapsLocationService.instance.UpdatePosition();
-			OnlineMapsLocationService.instance.restoreAfter = 1;
-            OnlineMapsGoogleGeocoding.Find(DataManager.instance.placeSelect.place_address).OnComplete += OnFindLocationComplete;
-			// OnlineMapsLocationService.instance.OnLocationChanged += OnLocationChanged;
-			OnlineMaps.instance.OnUpdateLate += OnUpdateLate;
+	    LatLongPosition position = DataManager.instance.latlongList.Find(p => p.place_id == DataManager.instance.placeSelect.place_id);
+        if (position == null) {
+        	lat = DataManager.instance.placeSelect.pos_latitude;
+        	lng = DataManager.instance.placeSelect.pos_longitude;
+        } else {
+        	lat = position.pos_latitude;
+        	lng = position.pos_longitude;
+        }
+        Vector2 posLatlng = new Vector2((float)lat,(float)lng);
+        Debug.Log("posLatlng " + posLatlng);
+		OnlineMapsLocationService.instance.UpdatePosition();
+		OnlineMapsLocationService.instance.restoreAfter = 1;
+        OnlineMapsGoogleGeocoding.Find(DataManager.instance.placeSelect.place_address).OnComplete += OnFindLocationComplete;
+		// OnlineMapsLocationService.instance.OnLocationChanged += OnLocationChanged;
+		OnlineMaps.instance.OnUpdateLate += OnUpdateLate;
 
 	}
     void OnDisable()

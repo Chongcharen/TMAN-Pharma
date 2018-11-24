@@ -18,6 +18,22 @@ public enum OnlineMapsAlign
 }
 
 /// <summary>
+/// Type of altitude
+/// </summary>
+public enum OnlineMapsAltitudeType
+{
+    /// <summary>
+    /// Altitude above sea level
+    /// </summary>
+    absolute,
+
+    /// <summary>
+    /// Altitude above ground level
+    /// </summary>
+    relative
+}
+
+/// <summary>
 /// Buffer state
 /// </summary>
 public enum OnlineMapsBufferStatus

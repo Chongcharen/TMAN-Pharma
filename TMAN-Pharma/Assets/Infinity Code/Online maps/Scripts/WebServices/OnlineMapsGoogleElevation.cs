@@ -59,6 +59,8 @@ public class OnlineMapsGoogleElevation:OnlineMapsGoogleAPIQuery
     private void Download(StringBuilder url, string key, string client, string signature)
     {
         if (!string.IsNullOrEmpty(key)) url.Append("&key=").Append(key);
+        else if (OnlineMapsKeyManager.hasGoogleMaps) url.Append("&key=").Append(OnlineMapsKeyManager.GoogleMaps());
+
         if (!string.IsNullOrEmpty(client)) url.Append("&client=").Append(client);
         if (!string.IsNullOrEmpty(signature)) url.Append("&signature=").Append(signature);
         www = OnlineMapsUtils.GetWWW(url);

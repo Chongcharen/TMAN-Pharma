@@ -98,6 +98,12 @@ public class OnlineMapsBuildingBuiltIn : OnlineMapsBuildingBase
         else usedNodes.Clear();
 
         way.GetNodes(nodes, usedNodes);
+
+        if (OnlineMapsBuildings.instance.OnPrepareBuildingCreation != null)
+        {
+            OnlineMapsBuildings.instance.OnPrepareBuildingCreation(way, usedNodes);
+        }
+
         List<Vector3> points = GetLocalPoints(usedNodes);
 
         if (points.Count < 3) return null;
@@ -124,17 +130,26 @@ public class OnlineMapsBuildingBuiltIn : OnlineMapsBuildingBase
 
         if (points.Count < 3) return null;
 
-        Vector4 cp = new Vector4(float.MaxValue, float.MaxValue, float.MinValue, float.MinValue);
-        for (int i = 0; i < points.Count; i++)
-        {
-            Vector3 point = points[i];
-            if (point.x < cp.x) cp.x = point.x;
-            if (point.z < cp.y) cp.y = point.z;
-            if (point.x > cp.z) cp.z = point.x;
-            if (point.z > cp.w) cp.w = point.z;
-        }
+        Vector3 centerPoint;
 
-        Vector3 centerPoint = new Vector3((cp.z + cp.x) / 2, 0, (cp.y + cp.w) / 2);
+        if (OnlineMapsBuildings.instance.OnCalculateBuildingCenter != null)
+        {
+            centerPoint = OnlineMapsBuildings.instance.OnCalculateBuildingCenter(points);
+        }
+        else
+        {
+            Vector4 cp = new Vector4(float.MaxValue, float.MaxValue, float.MinValue, float.MinValue);
+            for (int i = 0; i < points.Count; i++)
+            {
+                Vector3 point = points[i];
+                if (point.x < cp.x) cp.x = point.x;
+                if (point.z < cp.y) cp.y = point.z;
+                if (point.x > cp.z) cp.z = point.x;
+                if (point.z > cp.w) cp.w = point.z;
+            }
+
+            centerPoint = new Vector3((cp.z + cp.x) / 2, 0, (cp.y + cp.w) / 2);
+        }
 
         for (int i = 0; i < points.Count; i++) points[i] -= centerPoint;
 

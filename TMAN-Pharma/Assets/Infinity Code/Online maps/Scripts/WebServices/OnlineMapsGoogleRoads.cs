@@ -14,6 +14,8 @@ public class OnlineMapsGoogleRoads:OnlineMapsTextWebService
 {
     private OnlineMapsGoogleRoads(string key, IEnumerable path, bool interpolate)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.GoogleMaps();
+
         StringBuilder builder = new StringBuilder("https://roads.googleapis.com/v1/snapToRoads?key=").Append(key);
         if (interpolate) builder.Append("&intepolate=true");
         builder.Append("&path=");
@@ -66,6 +68,8 @@ public class OnlineMapsGoogleRoads:OnlineMapsTextWebService
 
     private OnlineMapsGoogleRoads(string key, IEnumerable path, Units units = Units.KPH)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.GoogleMaps();
+
         StringBuilder builder = new StringBuilder("https://roads.googleapis.com/v1/speedLimits?key=").Append(key);
         if (units != Units.KPH) builder.Append("&units=MPH");
 

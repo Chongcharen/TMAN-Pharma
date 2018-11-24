@@ -25,6 +25,8 @@ public class OnlineMapsGooglePlacesAutocomplete:OnlineMapsGoogleAPIQuery
     {
         _status = OnlineMapsQueryStatus.downloading;
 
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.GoogleMaps();
+
         StringBuilder url = new StringBuilder("https://maps.googleapis.com/maps/api/place/autocomplete/xml?sensor=false");
         url.Append("&input=").Append(OnlineMapsWWW.EscapeURL(input));
         url.Append("&key=").Append(key);

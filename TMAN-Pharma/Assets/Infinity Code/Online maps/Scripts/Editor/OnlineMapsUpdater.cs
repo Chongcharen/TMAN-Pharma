@@ -21,12 +21,13 @@ public class OnlineMapsUpdater : EditorWindow
     private const string invoiceNumberKey = assetPrefix + "InvoiceNumber";
 
     public static bool hasNewVersion = false;
+    public static string lastVersionID;
+    public static string updateAvailableStr;
 
     private static OnlineMapsUpdateChannel channel = OnlineMapsUpdateChannel.stable;
     private string invoiceNumber;
     private Vector2 scrollPosition;
     private List<OnlineMapsUpdateItem> updates;
-    private static string lastVersionID;
     private GUIContent helpContent;
 
     private void CheckNewVersions()
@@ -52,6 +53,7 @@ public class OnlineMapsUpdater : EditorWindow
             if (CompareVersions())
             {
                 hasNewVersion = true;
+                updateAvailableStr = "Update Available (" + OnlineMaps.version + " -> " + lastVersionID + "). Click here!!!";
                 return;
             }
         }
@@ -110,7 +112,9 @@ public class OnlineMapsUpdater : EditorWindow
             hasNewVersion = CompareVersions();
             EditorApplication.update += SetLastVersion;
         };
-        client.UploadDataAsync(new Uri("http://infinity-code.com/products_update/getlastversion.php"), "POST", Encoding.UTF8.GetBytes("c=" + (int)channel + "&package=" + WWW.EscapeURL(packageID)));
+
+        string pid = OnlineMapsWWW.EscapeURL(packageID);
+        client.UploadDataAsync(new Uri("http://infinity-code.com/products_update/getlastversion.php"), "POST", Encoding.UTF8.GetBytes("c=" + (int)channel + "&package=" + pid));
     }
 
     private static bool CompareVersions()
@@ -140,8 +144,9 @@ public class OnlineMapsUpdater : EditorWindow
     {
         WebClient client = new WebClient();
         client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+        string pid = OnlineMapsWWW.EscapeURL(packageID);
         string updateKey = client.UploadString("http://infinity-code.com/products_update/getupdatekey.php",
-            "key=" + invoiceNumber + "&package=" + WWW.EscapeURL(packageID));
+            "key=" + invoiceNumber + "&package=" + pid);
 
         return updateKey;
     }
@@ -156,7 +161,7 @@ public class OnlineMapsUpdater : EditorWindow
         try
         {
             response = client.UploadString("http://infinity-code.com/products_update/checkupdates.php",
-                "k=" + WWW.EscapeURL(updateKey) + "&v=" + OnlineMaps.version + "&c=" + (int)channel);
+                "k=" + OnlineMapsWWW.EscapeURL(updateKey) + "&v=" + OnlineMaps.version + "&c=" + (int)channel);
         }
         catch(Exception exception)
         {

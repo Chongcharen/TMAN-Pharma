@@ -22,6 +22,11 @@ public class OnlineMapsMarker3D : OnlineMapsMarkerBase
     public float? altitude;
 
     /// <summary>
+    /// Type of altitude
+    /// </summary>
+    public OnlineMapsAltitudeType altitudeType = OnlineMapsAltitudeType.absolute;
+
+    /// <summary>
     /// Need to check the map boundaries? \n
     /// It allows you to make 3D markers, which are active outside the map.
     /// </summary>
@@ -288,95 +293,14 @@ public class OnlineMapsMarker3D : OnlineMapsMarkerBase
     /// <param name="zoom">Zoom of the map</param>
     public override void Update(double tlx, double tly, double brx, double bry, int zoom)
     {
-        if (!enabled) return;
-        if (instance == null) Init(map.transform);  
-        if (control == null) control = OnlineMapsControlBase3D.instance;
-
-        if (!range.InRange(zoom)) visible = false;
-        else if (checkMapBoundaries)
-        {
-            if (latitude > tly || latitude < bry) visible = false;
-            else if (tlx < brx && (longitude < tlx || longitude > brx)) visible = false;
-            else if (tlx > brx && longitude < tlx && longitude > brx) visible = false;
-            else visible = true;
-        }
-        else visible = true;
-
-        if (!visible) return;
-
-        if (_prefab != prefab) Reinit(tlx, tly, brx, bry, zoom);
-
-        double mx, my;
-        map.projection.CoordinatesToTile(longitude, latitude, zoom, out mx, out my);
-
         double ttlx, ttly, tbrx, tbry;
         map.projection.CoordinatesToTile(tlx, tly, zoom, out ttlx, out ttly);
         map.projection.CoordinatesToTile(brx, bry, zoom, out tbrx, out tbry);
 
-        int maxX = 1 << zoom;
-
         Bounds bounds = control.cl.bounds;
+        float bestYScale = control.GetBestElevationYScale(tlx, tly, brx, bry);
 
-        double sx = tbrx - ttlx;
-        double mpx = mx - ttlx;
-        if (sx < 0) sx += maxX;
-        if (checkMapBoundaries)
-        {
-            if (mpx < 0) mpx += maxX;
-        }
-        else
-        {
-            double dx1 = Math.Abs(mpx - ttlx);
-            double dx2 = Math.Abs(mpx - tbrx);
-            double dx3 = Math.Abs(mpx - tbrx + maxX);
-            if (dx1 > dx2 && dx1 > dx3) mpx += maxX;
-        }
-
-        double px = mpx / sx;
-        double pz = (ttly - my) / (ttly - tbry);
-
-        _relativePosition = new Vector3((float)px, 0, (float)pz);
-
-        OnlineMapsTileSetControl tsControl = OnlineMapsTileSetControl.instance;
-
-        if (tsControl != null)
-        {
-            px = -map.tilesetSize.x / 2 - (px - 0.5) * map.tilesetSize.x;
-            pz = map.tilesetSize.y / 2 + (pz - 0.5) * map.tilesetSize.y;
-        }
-        else
-        {
-            Vector3 center = bounds.center;
-            Vector3 size = bounds.size;
-            px = center.x - (px - 0.5) * size.x / map.transform.lossyScale.x - map.transform.position.x;
-            pz = center.z + (pz - 0.5) * size.z / map.transform.lossyScale.z - map.transform.position.z;
-        }
-
-        Vector3 oldPosition = instance.transform.localPosition;
-        float y = 0;
-
-        if (altitude.HasValue)
-        {
-            float yScale = control.GetBestElevationYScale(tlx, tly, brx, bry);
-            y = altitude.Value * yScale;
-            if (tsControl != null)
-            {
-                if (tsControl.elevationBottomMode == OnlineMapsTileSetControl.ElevationBottomMode.minValue) y -= tsControl.elevationMinValue * yScale;
-                y *= tsControl.elevationScale;
-            }
-        }
-        else if (tsControl != null)
-        {
-            y = tsControl.GetElevationValue((float)px, (float)pz, tsControl.GetBestElevationYScale(tlx, tly, brx, bry), tlx, tly, brx, bry);
-        }
-
-        Vector3 newPosition = new Vector3((float)px, y, (float)pz);
-
-        if (oldPosition != newPosition)
-        {
-            instance.transform.localPosition = newPosition;
-            //if (OnPositionChanged != null) OnPositionChanged(this);
-        }
+        Update(map, control, bounds, tlx, tly, brx, bry, zoom, ttlx, ttly, tbrx, tbry, bestYScale);
     }
 
     /// <summary>
@@ -461,7 +385,11 @@ public class OnlineMapsMarker3D : OnlineMapsMarkerBase
 
         if (altitude.HasValue)
         {
-            y = altitude.Value * bestYScale;
+            y = altitude.Value;
+
+            if (altitudeType == OnlineMapsAltitudeType.relative && tsControl != null) y += tsControl.GetUnscaledElevationValue(px, pz, tlx, tly, brx, bry);
+
+            y *= bestYScale;
             if (tsControl != null)
             {
                 if (tsControl.elevationBottomMode == OnlineMapsTileSetControl.ElevationBottomMode.minValue) y -= tsControl.elevationMinValue * bestYScale;
@@ -470,7 +398,7 @@ public class OnlineMapsMarker3D : OnlineMapsMarkerBase
         }
         else if (tsControl != null)
         {
-            y = tsControl.GetElevationValue((float)px, (float)pz, bestYScale, tlx, tly, brx, bry);
+            y = tsControl.GetElevationValue(px, pz, bestYScale, tlx, tly, brx, bry);
         }
 
         Vector3 newPosition = new Vector3((float)px, y, (float)pz);

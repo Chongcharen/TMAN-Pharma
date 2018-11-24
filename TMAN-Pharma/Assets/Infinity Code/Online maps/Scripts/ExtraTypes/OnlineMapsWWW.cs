@@ -8,6 +8,10 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
+#if UNITY_2018_3_OR_NEWER
+using UnityEngine.Networking;
+#endif
+
 /// <summary>
 /// The wrapper class for WWW.\n
 /// It allows you to control requests.\n
@@ -15,6 +19,8 @@ using UnityEngine;
 /// </summary>
 public class OnlineMapsWWW
 {
+    private static MonoBehaviour temponaryBehavour;
+
     /// <summary>
     /// Event that occurs when a request is completed.
     /// </summary>
@@ -25,8 +31,14 @@ public class OnlineMapsWWW
     /// </summary>
     public object customData;
 
+#if UNITY_2018_3_OR_NEWER
+    private UnityWebRequest www;
+#else
     private WWW www;
+#endif
+
     private RequestType type;
+    private MonoBehaviour currentCoroutineBehaviour;
     private byte[] _bytes;
     private string _error;
     private bool _isDone;
@@ -35,7 +47,6 @@ public class OnlineMapsWWW
     private string _id;
     private IEnumerator waitResponse;
 
-
     /// <summary>
     /// Returns the contents of the fetched web page as a byte array.
     /// </summary>
@@ -43,7 +54,14 @@ public class OnlineMapsWWW
     {
         get
         {
-            if (type == RequestType.www) return www.bytes;
+            if (type == RequestType.www)
+            {
+#if UNITY_2018_3_OR_NEWER
+                return www.downloadHandler.data;
+#else
+                return www.bytes;
+#endif
+            }
             return _bytes;
         }
     }
@@ -55,8 +73,31 @@ public class OnlineMapsWWW
     {
         get
         {
-            if (type == RequestType.www) return www.bytesDownloaded;
+            if (type == RequestType.www)
+            {
+#if UNITY_2018_3_OR_NEWER
+                return (int)www.downloadedBytes;
+#else
+                return www.bytesDownloaded;
+#endif
+            }
             return _bytes != null ? _bytes.Length: 0;
+        }
+    }
+
+    private static MonoBehaviour coroutineBehaviour
+    {
+        get
+        {
+            if (OnlineMaps.instance != null) return OnlineMaps.instance;
+            if (temponaryBehavour == null)
+            {
+                GameObject go = new GameObject("__OnlineMapsWWW__");
+                go.hideFlags = HideFlags.HideInHierarchy;
+                temponaryBehavour = go.AddComponent<OnlineMapsWWWBehaviour>();
+            }
+
+            return temponaryBehavour;
         }
     }
 
@@ -101,7 +142,14 @@ public class OnlineMapsWWW
         {
             if (!isDone) throw new UnityException("WWW is not finished downloading yet");
 
-            if (type == RequestType.www) return www.responseHeaders;
+            if (type == RequestType.www)
+            {
+#if UNITY_2018_3_OR_NEWER
+                return www.GetResponseHeaders();
+#else
+                return www.responseHeaders;
+#endif
+            }
             return ParseHTTPHeaderString(responseHeadersString);
         }
     }
@@ -113,7 +161,14 @@ public class OnlineMapsWWW
     {
         get
         {
-            if (type == RequestType.www) return www.text;
+            if (type == RequestType.www)
+            {
+#if UNITY_2018_3_OR_NEWER
+                return www.downloadHandler.text;
+#else
+                return www.text;
+#endif
+            }
             return _bytes != null? GetTextEncoder().GetString(_bytes, 0, _bytes.Length): null;
         }
     }
@@ -134,8 +189,14 @@ public class OnlineMapsWWW
     {
         _url = url;
         type = RequestType.www;
+#if UNITY_2018_3_OR_NEWER
+        www = UnityWebRequest.Get(url);
+        www.SendWebRequest();
+#else
         www = new WWW(url);
-        OnlineMaps.instance.StartCoroutine(WaitResponse());
+#endif
+        currentCoroutineBehaviour = coroutineBehaviour;
+        currentCoroutineBehaviour.StartCoroutine(WaitResponse());
     }
 
     /// <summary>
@@ -151,8 +212,14 @@ public class OnlineMapsWWW
         _id = reqID;
         if (type == RequestType.www)
         {
+#if UNITY_2018_3_OR_NEWER
+            www = UnityWebRequest.Get(url);
+            www.SendWebRequest();
+#else
             www = new WWW(url);
-            OnlineMaps.instance.StartCoroutine(WaitResponse());
+#endif
+            currentCoroutineBehaviour = coroutineBehaviour;
+            currentCoroutineBehaviour.StartCoroutine(WaitResponse());
         }
     }
 
@@ -160,13 +227,18 @@ public class OnlineMapsWWW
     /// Constructor.
     /// </summary>
     /// <param name="www">WWW instance.</param>
+#if UNITY_2018_3_OR_NEWER
+    private OnlineMapsWWW(UnityWebRequest www)
+#else
     private OnlineMapsWWW(WWW www)
+#endif
     {
         _url = www.url;
         type = RequestType.www;
         this.www = www;
         waitResponse = WaitResponse();
-        OnlineMaps.instance.StartCoroutine(waitResponse);
+        currentCoroutineBehaviour = coroutineBehaviour;
+        currentCoroutineBehaviour.StartCoroutine(waitResponse);
     }
 
     /// <summary>
@@ -177,7 +249,7 @@ public class OnlineMapsWWW
         if (www != null && !www.isDone) www.Dispose();
         www = null;
         customData = null;
-        if (waitResponse != null) OnlineMaps.instance.StopCoroutine(waitResponse);
+        if (waitResponse != null) currentCoroutineBehaviour.StopCoroutine(waitResponse);
     }
 
     /// <summary>
@@ -187,7 +259,11 @@ public class OnlineMapsWWW
     /// <returns>Escaped string.</returns>
     public static string EscapeURL(string s)
     {
+#if UNITY_2018_3_OR_NEWER
+        return UnityWebRequest.EscapeURL(s);
+#else
         return WWW.EscapeURL(s);
+#endif
     }
 
     private void Finish()
@@ -236,7 +312,14 @@ public class OnlineMapsWWW
     {
         if (tex == null) throw new Exception("Texture is null");
 
-        if (type == RequestType.www) www.LoadImageIntoTexture(tex);
+        if (type == RequestType.www)
+        {
+#if UNITY_2018_3_OR_NEWER
+            tex.LoadImage(bytes);
+#else
+            www.LoadImageIntoTexture(tex);
+#endif
+        }
         else tex.LoadImage(_bytes);
     }
 
@@ -255,7 +338,7 @@ public class OnlineMapsWWW
             {
                 return dictionary;
             }
-            if ((num++ == 0) && str.StartsWith("HTTP"))
+            if (num++ == 0 && str.StartsWith("HTTP"))
             {
                 dictionary["STATUS"] = str;
             }
@@ -302,15 +385,21 @@ public class OnlineMapsWWW
 
     private IEnumerator WaitResponse()
     {
-        yield return www;
+        while (!www.isDone)
+        {
+            yield return null;
+        }
+        
         waitResponse = null;
         Finish();
     }
 
+#if !UNITY_2018_3_OR_NEWER
     public static implicit operator OnlineMapsWWW(WWW val)
     {
         return new OnlineMapsWWW(val);
     }
+#endif
 
     /// <summary>
     /// Type of request.

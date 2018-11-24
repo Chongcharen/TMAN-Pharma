@@ -298,6 +298,7 @@ public class OnlineMapsBingMapsElevation:OnlineMapsTextWebService
 
         public virtual void GenerateURL(StringBuilder builder)
         {
+            if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.BingMaps();
             builder.Append("https://dev.virtualearth.net/REST/v1/Elevation/").Append(urlToken).Append("?key=").Append(key);
             if (heights == Heights.ellipsoid) builder.Append("&hts=ellipsoid");
             if (output == Output.xml) builder.Append("&output=xml");

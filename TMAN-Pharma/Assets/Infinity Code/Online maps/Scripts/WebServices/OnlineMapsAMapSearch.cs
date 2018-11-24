@@ -53,6 +53,7 @@ public class OnlineMapsAMapSearch: OnlineMapsTextWebService
 
         internal virtual void GenerateURL(StringBuilder builder)
         {
+            if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.AMap();
             builder.Append(baseurl).Append("key=").Append(key).Append("&output=JSON");
         }
     }

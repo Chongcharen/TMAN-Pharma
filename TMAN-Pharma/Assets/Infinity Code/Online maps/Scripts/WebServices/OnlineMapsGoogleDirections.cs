@@ -24,6 +24,7 @@ public class OnlineMapsGoogleDirections : OnlineMapsGoogleAPIQuery
         StringBuilder url = new StringBuilder();
         url.AppendFormat("https://maps.googleapis.com/maps/api/directions/xml?origin={0}&destination={1}&sensor=false", OnlineMapsWWW.EscapeURL(origin), OnlineMapsWWW.EscapeURL(destination));
         if (alternatives) url.Append("&alternatives=true");
+        if (OnlineMapsKeyManager.hasGoogleMaps) url.Append("&key=").Append(OnlineMapsKeyManager.GoogleMaps());
         www = OnlineMapsUtils.GetWWW(url);
         www.OnComplete += OnRequestComplete;
     }
@@ -92,7 +93,10 @@ public class OnlineMapsGoogleDirections : OnlineMapsGoogleAPIQuery
         if (p.departure_time != null) url.Append("&departure_time=").Append(p.departure_time);
         if (p.arrival_time.HasValue && p.arrival_time.Value > 0) url.Append("&arrival_time=").Append(p.arrival_time.Value);
         if (!string.IsNullOrEmpty(p.language)) url.Append("&language=").Append(p.language);
+
         if (!string.IsNullOrEmpty(p.key)) url.Append("&key=").Append(p.key);
+        else if (OnlineMapsKeyManager.hasGoogleMaps) url.Append("&key=").Append(OnlineMapsKeyManager.GoogleMaps());
+
         if (p.traffic_model.HasValue && p.traffic_model.Value != TrafficModel.bestGuess) url.Append("&traffic_model=").Append(Enum.GetName(typeof(TrafficModel), p.traffic_model.Value));
         if (p.transit_mode.HasValue) OnlineMapsUtils.GetValuesFromEnum(url, "transit_mode", typeof(TransitMode), (int)p.transit_mode.Value);
         if (p.transit_routing_preference.HasValue) url.Append("&transit_routing_preference=").Append(Enum.GetName(typeof(TransitRoutingPreference), p.transit_routing_preference.Value));

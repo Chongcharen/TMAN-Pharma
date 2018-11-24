@@ -34,15 +34,7 @@ public class OnlineMapsMarker3DInstance : OnlineMapsMarkerInstanceBase
         cl.isTrigger = true;
     }
 
-    private void Start()
-    {
-        marker.GetPosition(out _longitude, out _latitude);
-        _scale = marker.scale;
-        transform.localRotation = (marker as OnlineMapsMarker3D).rotation;
-        transform.localScale = new Vector3(_scale, _scale, _scale);
-    }
-
-    private void Update()
+    private void LateUpdate()
     {
         if (marker as OnlineMapsMarker3D == null) 
         {
@@ -51,6 +43,14 @@ public class OnlineMapsMarker3DInstance : OnlineMapsMarkerInstanceBase
         }
 
         UpdateBaseProps();
+    }
+
+    private void Start()
+    {
+        marker.GetPosition(out _longitude, out _latitude);
+        _scale = marker.scale;
+        transform.localRotation = (marker as OnlineMapsMarker3D).rotation;
+        transform.localScale = new Vector3(_scale, _scale, _scale);
     }
 
     private void UpdateBaseProps()

@@ -23,6 +23,8 @@ public class OnlineMapsGooglePlaces: OnlineMapsGoogleAPIQuery
     {
         _status = OnlineMapsQueryStatus.downloading;
 
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.GoogleMaps();
+
         StringBuilder url = new StringBuilder();
         url.AppendFormat("https://maps.googleapis.com/maps/api/place/{0}/xml?sensor=false", p.typePath);
         if (!string.IsNullOrEmpty(key)) url.Append("&key=").Append(key);

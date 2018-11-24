@@ -108,6 +108,8 @@ public class OnlineMapsGooglePlacesResult
     /// </summary>
     public Photo[] photos;
 
+    public PlusCode plus_code;
+
     public OnlineMapsGooglePlacesResult()
     {
         
@@ -142,11 +144,9 @@ public class OnlineMapsGooglePlacesResult
                 open_now = n.Get<string>("open_now") == "true";
                 foreach (OnlineMapsXML wdt in n.FindAll("weekday_text")) weekday_text.Add(wdt.Value());
             }
-            else if (n.name == "photo")
-            {
-                photos.Add(new Photo(n));
-            }
-            else Debug.Log(n.name);
+            else if (n.name == "photo") photos.Add(new Photo(n));
+            else if (n.name == "plus_code") plus_code = new PlusCode(n);
+            else Debug.Log(n.name + ": " + n.Value());
         }
 
         this.photos = photos.ToArray();
@@ -200,7 +200,7 @@ public class OnlineMapsGooglePlacesResult
                 foreach (OnlineMapsXML ha in node.FindAll("html_attributions")) html_attributions.Add(ha.Value());
                 this.html_attributions = html_attributions.ToArray();
             }
-            catch (Exception)
+            catch
             {
             }
         }
@@ -227,6 +227,29 @@ public class OnlineMapsGooglePlacesResult
             if (!maxWidth.HasValue) maxWidth = width;
             if (!maxHeight.HasValue) maxHeight = height;
             return OnlineMapsGooglePlacePhoto.Download(key, photo_reference, maxWidth, maxHeight);
+        }
+    }
+
+    public class PlusCode
+    {
+        public string global_code;
+        public string compound_code;
+
+        public PlusCode()
+        {
+
+        }
+
+        public PlusCode(OnlineMapsXML node)
+        {
+            try
+            {
+                global_code = node.Get<string>("global_code");
+                compound_code = node.Get<string>("compound_code");
+            }
+            catch
+            {
+            }
         }
     }
 }

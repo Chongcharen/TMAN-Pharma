@@ -475,41 +475,7 @@ public class OnlineMapsTileSetControl : OnlineMapsControlBase3D
     {
         if (elevationData == null) return 0;
 
-        x = x / -map.tilesetSize.x;
-        z = z / map.tilesetSize.y;
-
-        int ew = elevationDataWidth - 1;
-        int eh = elevationDataHeight - 1;
-
-        if (x < 0) x = 0;
-        else if (x > 1) x = 1;
-
-        if (z < 0) z = 0;
-        else if (z > 1) z = 1;
-
-        double cx = (brx - tlx) * x + tlx;
-        double cz = (bry - tly) * z + tly;
-
-        float rx = (float)((cx - elevationX1) / elevationW * ew);
-        float ry = (float)((cz - elevationY1) / elevationH * eh);
-
-        if (rx < 0) rx = 0;
-        else if (rx > ew) rx = ew;
-
-        if (ry < 0) ry = 0;
-        else if (ry > eh) ry = eh;
-
-        int x1 = (int)rx;
-        int x2 = x1 + 1;
-        int y1 = (int)ry;
-        int y2 = y1 + 1;
-        if (x2 > ew) x2 = ew;
-        if (y2 > eh) y2 = eh;
-
-        float p1 = (elevationData[x2, eh - y1] - elevationData[x1, eh - y1]) * (rx - x1) + elevationData[x1, eh - y1];
-        float p2 = (elevationData[x2, eh - y2] - elevationData[x1, eh - y2]) * (rx - x1) + elevationData[x1, eh - y2];
-
-        float v = (p2 - p1) * (ry - y1) + p1;
+        float v = GetUnscaledElevationValue(x, z, tlx, tly, brx, bry);
         if (elevationBottomMode == ElevationBottomMode.minValue) v -= elevationMinValue;
         return v * yScale * elevationScale;
     }
@@ -558,7 +524,6 @@ public class OnlineMapsTileSetControl : OnlineMapsControlBase3D
         GetPosition(lng, lat, out px, out py);
         px /= map.width;
         py /= map.height;
-        Vector3 worldPos = new Vector3();
 
         double cpx = -map.tilesetSize.x * px;
         double cpy = map.tilesetSize.y * py;
@@ -567,10 +532,58 @@ public class OnlineMapsTileSetControl : OnlineMapsControlBase3D
         map.GetCorners(out tlx, out tly, out brx, out bry);
         float elevationScale = GetBestElevationYScale(tlx, tly, brx, bry);
         float elevation = GetElevationValue(cpx, cpy, elevationScale, tlx, tly, brx, bry);
-        worldPos = transform.position + transform.rotation * new Vector3((float)(cpx * transform.lossyScale.x), elevation * transform.lossyScale.y, (float)(cpy * transform.lossyScale.z));
+        Vector3 worldPos = transform.position + transform.rotation * new Vector3((float)(cpx * transform.lossyScale.x), elevation * transform.lossyScale.y, (float)(cpy * transform.lossyScale.z));
 
         Camera cam = activeCamera ?? Camera.main;
         return cam.WorldToScreenPoint(worldPos);
+    }
+
+    public float GetUnscaledElevationValue(double x, double z)
+    {
+        double tlx, tly, brx, bry;
+        map.GetCorners(out tlx, out tly, out brx, out bry);
+        return GetUnscaledElevationValue(x, z, tlx, tly, brx, bry);
+    }
+
+    public float GetUnscaledElevationValue(double x, double z, double tlx, double tly, double brx, double bry)
+    {
+        if (elevationData == null) return 0;
+
+        x = x / -map.tilesetSize.x;
+        z = z / map.tilesetSize.y;
+
+        int ew = elevationDataWidth - 1;
+        int eh = elevationDataHeight - 1;
+
+        if (x < 0) x = 0;
+        else if (x > 1) x = 1;
+
+        if (z < 0) z = 0;
+        else if (z > 1) z = 1;
+
+        double cx = (brx - tlx) * x + tlx;
+        double cz = (bry - tly) * z + tly;
+
+        float rx = (float) ((cx - elevationX1) / elevationW * ew);
+        float ry = (float) ((cz - elevationY1) / elevationH * eh);
+
+        if (rx < 0) rx = 0;
+        else if (rx > ew) rx = ew;
+
+        if (ry < 0) ry = 0;
+        else if (ry > eh) ry = eh;
+
+        int x1 = (int) rx;
+        int x2 = x1 + 1;
+        int y1 = (int) ry;
+        int y2 = y1 + 1;
+        if (x2 > ew) x2 = ew;
+        if (y2 > eh) y2 = eh;
+
+        float p1 = (elevationData[x2, eh - y1] - elevationData[x1, eh - y1]) * (rx - x1) + elevationData[x1, eh - y1];
+        float p2 = (elevationData[x2, eh - y2] - elevationData[x1, eh - y2]) * (rx - x1) + elevationData[x1, eh - y2];
+
+        return (p2 - p1) * (ry - y1) + p1;
     }
 
     /// <summary>
@@ -714,7 +727,8 @@ public class OnlineMapsTileSetControl : OnlineMapsControlBase3D
         if (tilesetMesh == null)
         {
             meshFilter = gameObject.AddComponent<MeshFilter>();
-            gameObject.AddComponent<MeshRenderer>();
+            MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+            meshRenderer.hideFlags = HideFlags.HideInInspector;
 
             if (colliderType == OnlineMapsColliderType.fullMesh || colliderType == OnlineMapsColliderType.simpleMesh) meshCollider = gameObject.AddComponent<MeshCollider>();
             else if (colliderType == OnlineMapsColliderType.box || colliderType == OnlineMapsColliderType.flatBox) boxCollider = gameObject.AddComponent<BoxCollider>();
@@ -869,8 +883,10 @@ public class OnlineMapsTileSetControl : OnlineMapsControlBase3D
 
         if (tileMaterial != null) material = Instantiate(tileMaterial) as Material;
         else material = new Material(tileShader);
+        material.hideFlags = HideFlags.HideInInspector;
 
         if (map.defaultTileTexture != null) material.mainTexture = map.defaultTileTexture;
+
         materials[x + y * w] = material;
     }
 
@@ -1026,6 +1042,7 @@ public class OnlineMapsTileSetControl : OnlineMapsControlBase3D
 
             if (tileMaterial != null) materials[i] = Instantiate(tileMaterial) as Material;
             else materials[i] = new Material(tilesetShader);
+            materials[i].hideFlags = HideFlags.HideInInspector;
 
             if (map.defaultTileTexture != null) materials[i].mainTexture = map.defaultTileTexture;
         }
@@ -1693,6 +1710,7 @@ public class OnlineMapsTileSetControl : OnlineMapsControlBase3D
         }
 
         Material material = materials[mi];
+        material.hideFlags = HideFlags.HideInInspector;
 
         if (currentTile != null)
         {

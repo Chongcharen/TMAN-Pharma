@@ -21,6 +21,8 @@ public class OnlineMapsGooglePlacePhoto : OnlineMapsWebServiceAPI
 
     private OnlineMapsGooglePlacePhoto(string key, string photo_reference, int? maxWidth, int? maxHeight)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.GoogleMaps();
+
         StringBuilder builder = new StringBuilder("https://maps.googleapis.com/maps/api/place/photo?key=").Append(key);
         builder.Append("&photo_reference=").Append(photo_reference);
         if (maxWidth.HasValue) builder.Append("&maxwidth=").Append(maxWidth);

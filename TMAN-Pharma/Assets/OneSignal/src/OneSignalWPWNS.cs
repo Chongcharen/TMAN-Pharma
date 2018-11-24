@@ -30,15 +30,15 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-#if UNITY_WP_8_1 && !UNITY_EDITOR
+#if UNITY_WP_8_1
 public class OneSignalWPWNS : OneSignalPlatform {
 
    public OneSignalWPWNS(string appId) {
       OneSignalSDK_WP_WNS.ExternalInitUnity.Init(appId, (message, inAdditionalData, isActive) => {
          if (OneSignal.builder != null && OneSignal.builder.notificationOpenedDelegate != null) {
-            Dictionary<string, string> additionalData = null;
+            Dictionary<string, object> additionalData = null;
             if (inAdditionalData != null)
-               additionalData = inAdditionalData.ToDictionary(pair => pair.Key, pair => (string)pair.Value);
+               additionalData = inAdditionalData.ToDictionary(pair => pair.Key, pair => (object)pair.Value);
 
             OSNotificationOpenedResult result = new OSNotificationOpenedResult();
             result.action = new OSNotificationAction();
@@ -94,9 +94,43 @@ public class OneSignalWPWNS : OneSignalPlatform {
    public void PromptLocation() {}
    public void SyncHashedEmail(string email) {}
    public void SetLogLevel(OneSignal.LOG_LEVEL logLevel, OneSignal.LOG_LEVEL visualLevel) {}
+   public void SetInFocusDisplaying(OneSignal.OSInFocusDisplayOption display) {}
+   public void addPermissionObserver() {}
+   public void removePermissionObserver() { }
+   public void addSubscriptionObserver() { }
+   public void removeSubscriptionObserver() { }
+
+   public OSPermissionSubscriptionState getPermissionSubscriptionState() {
+      var state = new OSPermissionSubscriptionState();
+      state.permissionStatus = new OSPermissionState();
+      state.subscriptionStatus = new OSSubscriptionState();
+
+      return state;
+   }
+
+   public OSPermissionState parseOSPermissionState(object stateDict) {
+      return new OSPermissionState();
+   }
+   public OSSubscriptionState parseOSSubscriptionState(object stateDict) {
+      return new OSSubscriptionState();
+   }
+
+   public OSPermissionStateChanges parseOSPermissionStateChanges(string stateChangesJSONString) {
+      var state = new OSPermissionStateChanges();
+      state.to = new OSPermissionState();
+      state.from = new OSPermissionState();
+      return state;
+   }
+   public OSSubscriptionStateChanges parseOSSubscriptionStateChanges(string stateChangesJSONString) {
+      var state = new OSSubscriptionStateChanges();
+      state.to = new OSSubscriptionState();
+      state.from = new OSSubscriptionState();
+      return state;
+   }
 
 
-   // Doesn't apply to Windows Phone: The Native SDK always registers.
+   // Doesn't apply to Windows Phone, doesn't have a native permission prompt
    public void RegisterForPushNotifications() {}
+   public void promptForPushNotificationsWithUserResponse() { }
 }
 #endif

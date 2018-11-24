@@ -115,7 +115,14 @@ public class DataManager : MonoBehaviour {
     public List<LatLongPosition> latlongList
     {
         get { return _latlongList; }
-        set { _latlongList = value; }
+        set {
+            Debug.Log("Set latlonglist " + value);
+            foreach(var data in value)
+            {
+                Debug.Log("data " + data.pos_longitude + "," + data.pos_longitude);
+            }
+            _latlongList = value; 
+        }
     }
     public PlaceCheckin placeCheckin
     {

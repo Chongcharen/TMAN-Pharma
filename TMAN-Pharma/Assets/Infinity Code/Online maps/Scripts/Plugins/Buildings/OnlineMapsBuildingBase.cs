@@ -196,8 +196,8 @@ public abstract class OnlineMapsBuildingBase:MonoBehaviour
 
         List<Vector3> localPoints = new List<Vector3>(Mathf.Min(nodes.Count, 8));
 
-        float sw = OnlineMapsUtils.tileSize * map.tilesetSize.x / map.tilesetWidth * map.transform.lossyScale.x;
-        float sh = OnlineMapsUtils.tileSize * map.tilesetSize.y / map.tilesetHeight * map.transform.lossyScale.z;
+        float sw = OnlineMapsUtils.tileSize * map.tilesetSize.x / map.tilesetWidth;
+        float sh = OnlineMapsUtils.tileSize * map.tilesetSize.y / map.tilesetHeight;
 
         for (int i = 0; i < nodes.Count; i++)
         {

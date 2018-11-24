@@ -396,6 +396,32 @@ public class OnlineMapsOSMAPIQuery: OnlineMapsTextWebService
             return null;
         }
 
+        private void GetAttributeValue(string s, int i, out int svi, out int evi)
+        {
+            svi = -1;
+            evi = -1;
+            int it = 0;
+            while (i < l)
+            {
+                if (it++ > 1000)
+                {
+                    Debug.Log("it > 1000");
+                    return;
+                }
+
+                if (s[i] == '"')
+                {
+                    if (svi == -1) svi = i + 1;
+                    else
+                    {
+                        evi = i;
+                        return;
+                    }
+                }
+                i++;
+            }
+        }
+
         private void GetNameIndices(string s, int i, out int startIndex, out int endIndex, out char lastChar)
         {
             int it = 0;
@@ -507,32 +533,6 @@ public class OnlineMapsOSMAPIQuery: OnlineMapsTextWebService
                 return true;
             }
             return false;
-        }
-
-        private void GetAttributeValue(string s, int i, out int svi, out int evi)
-        {
-            svi = -1;
-            evi = -1;
-            int it = 0;
-            while (i < l)
-            {
-                if (it++ > 1000)
-                {
-                    Debug.Log("it > 1000");
-                    return;
-                }
-
-                if (s[i] == '"')
-                {
-                    if (svi == -1) svi = i + 1;
-                    else
-                    {
-                        evi = i;
-                        return;
-                    }
-                }
-                i++;
-            }
         }
     }
 }

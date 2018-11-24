@@ -11,6 +11,8 @@ public class OnlineMapsQQSearch:OnlineMapsTextWebService
 {
     private OnlineMapsQQSearch(string key, string keyword, Params p)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.QQ();
+
         StringBuilder builder = new StringBuilder("http://apis.map.qq.com/ws/place/v1/search?key=").Append(key).Append("&keyword=").Append(OnlineMapsWWW.EscapeURL(keyword));
         p.AppendParams(builder);
         www = OnlineMapsUtils.GetWWW(builder);

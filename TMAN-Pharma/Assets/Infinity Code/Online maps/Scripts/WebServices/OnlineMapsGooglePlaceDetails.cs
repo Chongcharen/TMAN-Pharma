@@ -19,6 +19,8 @@ public class OnlineMapsGooglePlaceDetails : OnlineMapsGoogleAPIQuery
     {
         _status = OnlineMapsQueryStatus.downloading;
 
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.GoogleMaps();
+
         StringBuilder url = new StringBuilder("https://maps.googleapis.com/maps/api/place/details/xml?sensor=false&key=").Append(key);
 
         if (!string.IsNullOrEmpty(place_id)) url.Append("&placeid=").Append(place_id);

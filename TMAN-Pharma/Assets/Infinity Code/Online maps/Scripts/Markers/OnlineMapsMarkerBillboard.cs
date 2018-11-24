@@ -60,6 +60,14 @@ public class OnlineMapsMarkerBillboard : OnlineMapsMarkerInstanceBase
         marker = null;
     }
 
+    private void LateUpdate()
+    {
+        transform.LookAt(OnlineMapsControlBase3D.instance.activeCamera.transform.position);
+        Vector3 euler = transform.rotation.eulerAngles;
+        euler.y = 0;
+        transform.rotation = Quaternion.Euler(euler);
+    }
+
     private void OnInitComplete(OnlineMapsMarkerBase markerBase)
     {
         OnlineMapsMarker marker = markerBase as OnlineMapsMarker;
@@ -90,14 +98,6 @@ public class OnlineMapsMarkerBillboard : OnlineMapsMarkerInstanceBase
     private void Start()
     {
         gameObject.AddComponent<BoxCollider>();
-        Update();
-    }
-
-    private void Update()
-    {
-        transform.LookAt(OnlineMapsControlBase3D.instance.activeCamera.transform.position);
-        Vector3 euler = transform.rotation.eulerAngles;
-        euler.y = 0;
-        transform.rotation = Quaternion.Euler(euler);
+        LateUpdate();
     }
 }

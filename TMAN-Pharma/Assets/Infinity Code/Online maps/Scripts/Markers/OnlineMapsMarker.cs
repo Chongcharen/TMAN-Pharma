@@ -270,8 +270,14 @@ public class OnlineMapsMarker : OnlineMapsMarkerBase
         controlRect.x -= controlRect.width * uvRect.x;
         controlRect.y -= controlRect.height * uvRect.y;
 
+        int max = 1 << map.buffer.apiZoom;
+        bool isEntireWorld = max == map.width / OnlineMapsUtils.tileSize;
+
         double tlx, tly;
         map.projection.CoordinatesToTile(map.buffer.topLeftPosition.x, map.buffer.topLeftPosition.y, map.buffer.apiZoom, out tlx, out tly);
+
+        //if (isEntireWorld) tlx -= max;
+
         tlx *= OnlineMapsUtils.tileSize;
         tly *= OnlineMapsUtils.tileSize;
 
@@ -281,10 +287,13 @@ public class OnlineMapsMarker : OnlineMapsMarkerBase
         ty *= OnlineMapsUtils.tileSize;
 
         Vector2 pos = GetAlignedPosition((int)tx, (int)ty);
+
         float scaleX = controlRect.width / map.width;
         float scaleY = controlRect.height / map.height;
         pos.x = Mathf.RoundToInt((float)(pos.x - tlx) * scaleX + controlRect.x);
         pos.y = Mathf.RoundToInt(controlRect.yMax - (float)(pos.y - tly + height) * scaleY);
+
+        if (isEntireWorld && pos.x < controlRect.x) pos.x += controlRect.width;
 
         return new Rect(pos.x, pos.y, width * scaleX, height * scaleY);
     }

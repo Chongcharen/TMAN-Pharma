@@ -32,17 +32,20 @@ public class OnlineMaps : MonoBehaviour, ISerializationCallbackReceiver
     /// <summary>
     /// The current version of Online Maps
     /// </summary>
-    public const string version = "2.5.37.1";
+    public const string version = "2.5.48.1";
 
+    /// <summary>
+    /// The minimum zoom level
+    /// </summary>
     public const int MINZOOM = 1;
 
     /// <summary>
-    /// The maximum zoom level.
+    /// The maximum zoom level
     /// </summary>
     public const int MAXZOOM = 20;
 
     /// <summary>
-    /// The maximum number simultaneously downloading tiles.
+    /// The maximum number simultaneously downloading tiles
     /// </summary>
     public static int maxTileDownloads = 5;
 
@@ -1611,6 +1614,7 @@ public class OnlineMaps : MonoBehaviour, ISerializationCallbackReceiver
         OnlineMapsTile tile = www.customData as OnlineMapsTile;
         
         if (tile == null) return;
+        if (tile.trafficWWW == null || !tile.trafficWWW.isDone) return;
 
         if (tile.status == OnlineMapsTileStatus.disposed)
         {
@@ -1624,7 +1628,7 @@ public class OnlineMaps : MonoBehaviour, ISerializationCallbackReceiver
             {
                 if (tile.OnLabelDownloadComplete()) buffer.ApplyTile(tile);
             }
-            else
+            else if (tile.trafficWWW != null && traffic)
             {
                 Texture2D trafficTexture = new Texture2D(256, 256, TextureFormat.ARGB32, control.mipmapForTiles)
                 {

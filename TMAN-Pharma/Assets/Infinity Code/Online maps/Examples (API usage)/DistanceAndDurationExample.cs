@@ -9,7 +9,7 @@ namespace InfinityCode.OnlineMapsExamples
     /// <summary>
     /// Example how to calculate the distance and the duration of the route
     /// </summary>
-    [AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/CreateCustomStylesExample")]
+    [AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/DistanceAndDurationExample")]
     public class DistanceAndDurationExample : MonoBehaviour
     {
         private void Start()

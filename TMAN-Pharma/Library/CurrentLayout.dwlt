@@ -38,7 +38,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 591
+    width: 475
     height: 635
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
@@ -133,10 +133,10 @@ MonoBehaviour:
     y: 30
     width: 1280
     height: 635
-  m_MinSize: {x: 885, y: 342}
-  m_MaxSize: {x: 16010, y: 8042}
+  m_MinSize: {x: 887, y: 342}
+  m_MaxSize: {x: 16012, y: 8042}
   vertical: 0
-  controlID: 12
+  controlID: 82
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 591
+    x: 475
     y: 0
-    width: 204
+    width: 320
     height: 635
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 342}
   m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 73
+  controlID: 26
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -643,8 +643,8 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 94
-    width: 589
+    y: 19
+    width: 473
     height: 614
   m_PersistentViewDataDictionary: {fileID: 0}
   m_MaximizeOnPlay: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 1
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -678,25 +678,25 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
-      width: 589
+      width: 473
       height: 597
-    m_Scale: {x: 0.4296875, y: 0.4296875}
-    m_Translation: {x: 294.5, y: 298.5}
+    m_Scale: {x: 0.40337837, y: 0.40337837}
+    m_Translation: {x: 236.5, y: 298.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -685.38184
-      y: -694.6909
-      width: 1370.7637
-      height: 1389.3818
+      x: -586.29816
+      y: -740
+      width: 1172.5963
+      height: 1480
     m_MinimalGUI: 1
-  m_defaultScale: 0.40337837
+  m_defaultScale: 2
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 1178, y: 1228}
+  m_LastWindowPixelSize: {x: 946, y: 1228}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000100
@@ -721,9 +721,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 593
+    x: 477
     y: 94
-    width: 200
+    width: 316
     height: 614
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
@@ -865,24 +865,24 @@ MonoBehaviour:
     height: 224
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
-    scrollPos: {x: 0, y: 377.98145}
-    m_SelectedIDs: 585d0000
-    m_LastClickedID: 23896
-    m_ExpandedIDs: 40f9fffff4ffffff00000000ea4b00004c5000008052000094530000ce5700000e5d0000585d00006e5d00000c5e0000725e00000c620000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 9ae8ffff36eaffff10ebffff24eeffffd6fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PageMenu
-      m_OriginalName: PageMenu
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 23896
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 9}
     m_SearchString: 
@@ -937,9 +937,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 627
+    x: 797
     y: 339
-    width: 374
+    width: 204
     height: 369
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
@@ -954,20 +954,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefab/Object
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefab/Object
+  - Assets
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: /Volumes/ProgramHD/Unity Project/TMAN Pharma/TMAN-Pharma/TMAN-Pharma
+  m_LastProjectPath: /Volumes/ProgramHD/GitHub/CodeBee/TMAN-Pharma/TMAN-Pharma
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 395}
-    m_SelectedIDs: d23a0000
-    m_LastClickedID: 15058
-    m_ExpandedIDs: 000000009e370000b037000098380000b0380000ea3800001e390000723900009c390000ea390000723a0000183b0000023c0000383c0000d03c0000223e0000263e00002c3e0000683e0000e23e0000e83e0000fe3e0000aa3f0000c03f0000c83f0000e03f00003c400000e4400000024100003e42000068420000ca420000d2430000d64300004e440000146a0000166a000000ca9a3b
+    scrollPos: {x: 0, y: 95}
+    m_SelectedIDs: 78370000
+    m_LastClickedID: 14200
+    m_ExpandedIDs: 0000000076370000883700007038000088380000c2380000f63800004a39000074390000c23900004c3a0000f23a0000de3b0000143c0000ae3c0000023e0000063e00000c3e0000483e0000c23e0000c83e0000de3e00008a3f0000a03f0000a83f0000c23f00001e400000c6400000e4400000204200004a420000b0420000b8430000bc430000344400000c6a00000e6a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -995,7 +995,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009e370000b037000098380000b0380000ea3800001e390000723900009c390000ea390000723a0000183b0000023c0000383c0000d03c0000223e0000263e00002c3e0000683e0000e23e0000e83e0000fe3e0000aa3f0000c03f0000c83f0000e03f00003c400000e4400000024100003e42000068420000ca420000d2430000d64300004e440000146a0000166a0000
+    m_ExpandedIDs: 0000000076370000883700007038000088380000c2380000f63800004a39000074390000c23900004c3a0000f23a0000de3b0000143c0000ae3c0000023e0000063e00000c3e0000483e0000c23e0000c83e0000de3e00008a3f0000a03f0000a83f0000c23f00001e400000c6400000e4400000204200004a420000b0420000b8430000bc430000344400000c6a00000e6a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1049,7 +1049,7 @@ MonoBehaviour:
     m_NewAssetIndexInList: -1
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
-  m_DirectoriesAreaWidth: 165
+  m_DirectoriesAreaWidth: 84
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52

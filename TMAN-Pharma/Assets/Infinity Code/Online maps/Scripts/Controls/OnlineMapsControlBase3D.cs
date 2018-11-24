@@ -248,51 +248,54 @@ public abstract class OnlineMapsControlBase3D: OnlineMapsControlBase
 
         Vector2 inputPosition = GetInputPosition();
 
-        if (allowCameraControl && !IsCursorOnUIElement(inputPosition))
+        if (allowCameraControl)
         {
+            if (!IsCursorOnUIElement(inputPosition))
+            {
 #if (!UNITY_ANDROID && !UNITY_IPHONE) || UNITY_EDITOR
-            if (Input.GetMouseButton(1))
-            {
-                isCameraControl = true;
-                if (lastInputPosition != inputPosition && lastInputPosition != Vector2.zero)
+                if (Input.GetMouseButton(1))
                 {
-                    Vector2 offset = lastInputPosition - inputPosition;
-                    cameraRotation.x -= offset.y / 10f * cameraSpeed.x;
-                    cameraRotation.y -= offset.x / 10f * cameraSpeed.y;
-                }
-                lastInputPosition = inputPosition;
-            }
-            else if (isCameraControl)
-            {
-                lastInputPosition = Vector2.zero;
-                isCameraControl = false;
-            }
-#else
-            if (!allowZoom && allowCameraControl)
-            {
-                if (Input.touchCount == 2)
-                {
-                    Vector2 p1 = Input.GetTouch(0).position;
-                    Vector2 p2 = Input.GetTouch(1).position;
-
-                    Vector2 center = Vector2.Lerp(p1, p2, 0.5f);
-                    if (lastGestureCenter == Vector2.zero) lastGestureCenter = center;
-                    else if (lastGestureCenter != center)
+                    isCameraControl = true;
+                    if (lastInputPosition != inputPosition && lastInputPosition != Vector2.zero)
                     {
-                        Vector2 offset = lastGestureCenter - center;
+                        Vector2 offset = lastInputPosition - inputPosition;
                         cameraRotation.x -= offset.y / 10f * cameraSpeed.x;
                         cameraRotation.y -= offset.x / 10f * cameraSpeed.y;
-                        lastGestureCenter = center;
                     }
-
-                    lastInputPosition = center;
+                    lastInputPosition = inputPosition;
                 }
-                else
+                else if (isCameraControl)
                 {
-                    lastGestureCenter = Vector2.zero;
+                    lastInputPosition = Vector2.zero;
+                    isCameraControl = false;
                 }
-            }
+#else
+                if (!allowZoom)
+                {
+                    if (Input.touchCount == 2)
+                    {
+                        Vector2 p1 = Input.GetTouch(0).position;
+                        Vector2 p2 = Input.GetTouch(1).position;
+
+                        Vector2 center = Vector2.Lerp(p1, p2, 0.5f);
+                        if (lastGestureCenter == Vector2.zero) lastGestureCenter = center;
+                        else if (lastGestureCenter != center)
+                        {
+                            Vector2 offset = lastGestureCenter - center;
+                            cameraRotation.x -= offset.y / 10f * cameraSpeed.x;
+                            cameraRotation.y -= offset.x / 10f * cameraSpeed.y;
+                            lastGestureCenter = center;
+                        }
+
+                        lastInputPosition = center;
+                    }
+                    else
+                    {
+                        lastGestureCenter = Vector2.zero;
+                    }
+                }
 #endif
+            }
 
             UpdateCameraPosition();
         }

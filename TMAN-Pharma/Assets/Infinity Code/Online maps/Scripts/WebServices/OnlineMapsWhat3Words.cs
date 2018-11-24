@@ -34,6 +34,8 @@ public class OnlineMapsWhat3Words:OnlineMapsTextWebService
     /// <returns>Query instance.</returns>
     public static OnlineMapsWhat3Words AutoSuggest(string key, string addr, bool multilingual = false, string lang = "en", OnlineMapsVector2d? focus = null, Clip clip = null, int? count = null, Display display = Display.full)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.What3Words();
+
         StringBuilder url = new StringBuilder(endpoint).Append("autosuggest");
         if (multilingual) url.Append("-ml");
         url.Append("?format=json&key=").Append(key);
@@ -60,6 +62,8 @@ public class OnlineMapsWhat3Words:OnlineMapsTextWebService
     /// <returns>Query instance.</returns>
     public static OnlineMapsWhat3Words Forward(string key, string addr, string lang = null, Display display = Display.full)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.What3Words();
+
         StringBuilder url = new StringBuilder(endpoint).Append("forward");
         url.Append("?format=json&key=").Append(key);
         url.Append("&addr=").Append(addr);
@@ -75,6 +79,8 @@ public class OnlineMapsWhat3Words:OnlineMapsTextWebService
     /// <returns>Query instance.</returns>
     public static OnlineMapsWhat3Words GetLanguages(string key)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.What3Words();
+
         StringBuilder url = new StringBuilder(endpoint);
         url.Append("languages?format=json&key=").Append(key);
         return new OnlineMapsWhat3Words(url);
@@ -134,6 +140,8 @@ public class OnlineMapsWhat3Words:OnlineMapsTextWebService
     /// <returns>Query instance.</returns>
     public static OnlineMapsWhat3Words Grid(string key, OnlineMapsGeoRect bbox)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.What3Words();
+
         StringBuilder url = new StringBuilder(endpoint);
         url.Append("grid?format=json&key=").Append(key);
         url.Append("&bbox=").Append(bbox.top).Append(",").Append(bbox.right).Append(",").Append(bbox.bottom).Append(",").Append(bbox.left);
@@ -150,6 +158,8 @@ public class OnlineMapsWhat3Words:OnlineMapsTextWebService
     /// <returns>Query instance.</returns>
     public static OnlineMapsWhat3Words Reverse(string key, OnlineMapsVector2d coords, string lang = null, Display display = Display.full)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.What3Words();
+
         StringBuilder url = new StringBuilder(endpoint).Append("reverse");
         url.Append("?format=json&key=").Append(key);
         url.Append("&coords=").Append(coords.y).Append(",").Append(coords.x);
@@ -174,6 +184,8 @@ public class OnlineMapsWhat3Words:OnlineMapsTextWebService
     /// <returns>Query instance.</returns>
     public static OnlineMapsWhat3Words StandardBlend(string key, string addr, bool multilingual = false, string lang = "en", OnlineMapsVector2d? focus = null)
     {
+        if (string.IsNullOrEmpty(key)) key = OnlineMapsKeyManager.What3Words();
+
         StringBuilder url = new StringBuilder(endpoint).Append("standardblend");
         if (multilingual) url.Append("-ml");
         url.Append("?format=json&key=").Append(key);

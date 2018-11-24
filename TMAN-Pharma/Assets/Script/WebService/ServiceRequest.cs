@@ -413,6 +413,7 @@ public void GetReceiveAward(int member_id, string receive_name, string code_stor
     }
     public void GetAllPosition()
     {
+        Debug.Log("Get all position");
         WWW www = new WWW(GetUrlRequest("getALLPosition"));
         StartCoroutine(ServerCallBackToList<LatLongPosition>(www, latlongData =>
         {
@@ -458,11 +459,16 @@ public void GetReceiveAward(int member_id, string receive_name, string code_stor
         StartCoroutine(ServerCallBackToList<PlaceFilter>(www, placeFilterData =>
         {
             DataManager.instance.placeFilter = placeFilterData;
+            foreach (var data in DataManager.instance.placeFilter)
+            {
+                Debug.Log("Data " + data.place_id);
+            }
             EFE_Base.instance.OpenPanelByIndex(Intent.FindPlaceResult);
         }));
     }
 	public void SearchPlaceByID(int place_id)
     {
+        Debug.Log("SearchPlaceByID " + place_id);
         WWWForm form = new WWWForm();
 		form.AddField("place_id", place_id);
 		WWW www = new WWW(GetUrlRequest("SearchBYID"),form);
@@ -527,6 +533,7 @@ public void GetReceiveAward(int member_id, string receive_name, string code_stor
     }
     IEnumerator ServerCallBackToList<T>(WWW www, Action<List<T>> callBack)
     {
+        Debug.Log("Load link " + www.url);
         PopupManager.instance.OpenLoading();
         yield return StartCoroutine(new WWWRequest(www));
         if (www.isDone)

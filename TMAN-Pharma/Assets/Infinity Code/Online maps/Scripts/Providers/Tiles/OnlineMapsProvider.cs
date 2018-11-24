@@ -255,7 +255,7 @@ public class OnlineMapsProvider
                     new MapType(SATELLITE)
                     {
                         urlWithLabels = "https://mt{rnd0-3}.googleapis.com/vt/lyrs=y&hl={lng}&x={x}&y={y}&z={zoom}",
-                        urlWithoutLabels = "https://khm{rnd0-3}.googleapis.com/kh?v=742&hl={lng}&x={x}&y={y}&z={zoom}",
+                        urlWithoutLabels = "https://khm{rnd0-3}.googleapis.com/kh?v=804&hl={lng}&x={x}&y={y}&z={zoom}",
                     },
                     new MapType(RELIEF)
                     {

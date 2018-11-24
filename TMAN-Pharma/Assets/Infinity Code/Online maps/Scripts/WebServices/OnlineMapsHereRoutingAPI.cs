@@ -15,6 +15,9 @@ public class OnlineMapsHereRoutingAPI: OnlineMapsTextWebService
 {
     private OnlineMapsHereRoutingAPI(string app_id, string app_code, Waypoint[] waypoints, RoutingMode mode, Params p)
     {
+        if (string.IsNullOrEmpty(app_code)) app_code = OnlineMapsKeyManager.HereAppCode();
+        if (string.IsNullOrEmpty(app_id)) app_id = OnlineMapsKeyManager.HereAppID();
+
         if (string.IsNullOrEmpty(app_id)) throw new Exception("app_id can not be empty.");
         if (string.IsNullOrEmpty(app_code)) throw new Exception("app_code can not be empty.");
         if (waypoints == null || waypoints.Length < 2) throw new Exception("Requires 2 or more waypoints.");

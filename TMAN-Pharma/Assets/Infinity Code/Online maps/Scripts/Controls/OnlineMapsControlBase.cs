@@ -378,6 +378,7 @@ public abstract class OnlineMapsControlBase : MonoBehaviour
         int maxX = 1 << (map.zoom - 1);
         if (dx < -maxX) dx += maxX << 1;
         px = dx * OnlineMapsUtils.tileSize;
+        if (px < 0 && map.width == (1 << map.zoom) * OnlineMapsUtils.tileSize) px += map.width;
         py = dy * OnlineMapsUtils.tileSize;
     }
 

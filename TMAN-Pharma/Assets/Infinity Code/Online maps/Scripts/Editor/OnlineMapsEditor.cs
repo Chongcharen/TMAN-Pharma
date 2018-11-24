@@ -871,9 +871,6 @@ public class OnlineMapsEditor : Editor
         EditorGUILayout.PropertyField(pTilesetSize, cTilesetSize);
 
         int dts = OnlineMapsUtils.tileSize * 2;
-        /*if (pTilesetWidth.intValue % dts != 0) pTilesetWidth.intValue = Mathf.FloorToInt(pTilesetWidth.intValue / (float) dts + 0.5f) * dts;
-        if (pTilesetHeight.intValue % dts != 0) pTilesetHeight.intValue = Mathf.FloorToInt(pTilesetHeight.intValue / (float) dts + 0.5f) * dts;*/
-
         if (pTilesetWidth.intValue % 256 != 0)
         {
             EditorGUILayout.HelpBox("Width is not equal to 256 * N, the map will not work correctly.", MessageType.Error);
@@ -897,6 +894,8 @@ public class OnlineMapsEditor : Editor
         {
             Color defBackgroundColor = GUI.backgroundColor;
             GUI.backgroundColor = new Color(1, 0.5f, 0.5f);
+            updateAvailableContent.text = OnlineMapsUpdater.updateAvailableStr;
+
             if (GUILayout.Button(updateAvailableContent, EditorStyles.toolbarButton))
             {
                 OnlineMapsUpdater.OpenWindow();

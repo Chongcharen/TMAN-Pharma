@@ -26,6 +26,9 @@ public class OnlineMapsGoogleGeocoding : OnlineMapsGoogleAPIQuery
         if (!string.IsNullOrEmpty(address)) url.Append("&address=").Append(OnlineMapsWWW.EscapeURL(address));
         if (!string.IsNullOrEmpty(latlng)) url.Append("&latlng=").Append(latlng.Replace(" ", ""));
         if (!string.IsNullOrEmpty(lang)) url.Append("&language=").Append(lang);
+
+        if (OnlineMapsKeyManager.hasGoogleMaps) url.Append("&key=").Append(OnlineMapsKeyManager.GoogleMaps());
+
         www = OnlineMapsUtils.GetWWW(url);
         www.OnComplete += OnRequestComplete;
     }
@@ -171,6 +174,8 @@ public class OnlineMapsGoogleGeocoding : OnlineMapsGoogleAPIQuery
         internal virtual void GenerateURL(StringBuilder url)
         {
             if (!string.IsNullOrEmpty(key)) url.Append("&key=").Append(key);
+            else if (OnlineMapsKeyManager.hasGoogleMaps) url.Append("&key=").Append(key);
+
             if (!string.IsNullOrEmpty(language)) url.Append("&language=").Append(language);
             if (!string.IsNullOrEmpty(client)) url.Append("&client=").Append(client);
             if (!string.IsNullOrEmpty(signature)) url.Append("&signature=").Append(signature);
