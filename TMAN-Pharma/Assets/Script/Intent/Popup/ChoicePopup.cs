@@ -1,38 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class ChoicePopup : Popup {
-    [SerializeField]
-    Button b_ok, b_cancel;
-    IPopupOkReference popupRef;
+public class ChoicePopup : Popup
+{
+    public Button b_ok,b_cancel;
+
     void Start()
     {
         b_ok.onClick.AddListener(OnOK);
         b_cancel.onClick.AddListener(OnCancel);
     }
+    void OnOK()
+    {
+        popupCallback.Accept();
+    }
     void OnCancel()
     {
-        Hide();
+        PopupManager.instance.ClosePopup();
     }
-    void OnOK() {
-        
-        if (popupRef != null)
-        {
-            popupRef.OnOk();
-            popupRef = null;
-        }
-        Hide();
-    }
-    
-
-    void SetChoiceCallback(string msg, IPopupOkReference popupOk = null)
-    {
-        description_txt.text = msg;
-        popupRef = popupOk;
-    }
-  
-}
-public interface IPopupOkReference
-{
-    void OnOk();
 }

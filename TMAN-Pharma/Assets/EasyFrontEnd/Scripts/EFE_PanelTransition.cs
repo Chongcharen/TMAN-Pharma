@@ -9,7 +9,7 @@ using DG.Tweening;
 public class EFE_PanelTransition : MonoBehaviour {
 	
 	public TransitionType transitionInType;
-	public enum TransitionType {None,SlideInFromLeft,SlideInFromRight,SlideInFromTop,SlideInFromBottom};//FadeIn, ScaleIn coming soon
+	public enum TransitionType {None,SlideInFromLeft,SlideInFromRight,SlideInFromTop,SlideInFromBottom, SlideInFromMap };//FadeIn, ScaleIn coming soon
 	[Tooltip("For main panels you can leav this at zero but is useful for offsetting buttons and images which have EFE transition components that should slide in AFTER the" +
 	"main panel has transitioned into view")]
 	public float transitionInDelay;
@@ -19,7 +19,7 @@ public class EFE_PanelTransition : MonoBehaviour {
 	public TransitionTypeOut transitionOutType;
 	public enum TransitionTypeOut {None,SlideOutToLeft,SlideOutToRight,SlideOutToTop,SlideOutToBottom};// FadeOut, ScaleOut coming soon
 	public EaseType easeType;
-	
+	float mWidth = 100;
 	[Tooltip("Transition time in seconds")]
 	public float transitionSpeed ;
 	
@@ -67,7 +67,7 @@ public class EFE_PanelTransition : MonoBehaviour {
 	private RectTransform rootCanvasRect;
 	private Vector3 startPosition;
 	private Vector3 startScale;
-	
+	private float canvasWidth;
 	void Awake () 
 	{
 		rootCanvasRect = GameObject.Find("EFE_Canvas").GetComponent<RectTransform>();
@@ -83,7 +83,7 @@ public class EFE_PanelTransition : MonoBehaviour {
 				//rootCanvasRect.anchoredPosition;
 			print("Centered pivot");
 		}
-		
+		canvasWidth = rootCanvasRect.GetComponent<RectTransform> ().rect.width;
 		
 	}
 	
@@ -138,32 +138,19 @@ public class EFE_PanelTransition : MonoBehaviour {
 			}
 		case TransitionType.SlideInFromLeft:
 			{
-				//Vector3 myposition = this.gameObject.transform.localPosition;
-				//myposition.x = myposition.x - myRect.rect.width;
-				//this.gameObject.transform.localPosition	=myposition;
-				//transform.DOMove(rootCanvasRect.position, transitionSpeed).OnComplete(TransitionComplete);;
-				//break;
-				
-				Vector3 newPosition = rootCanvasRect.anchoredPosition;
-				newPosition.x =-rootCanvasRect.anchoredPosition.x;// + myRect.rect.width;
-				transform.position =newPosition;
-				transform.DOMove(rootCanvasRect.anchoredPosition, transitionSpeed).OnComplete(TransitionInComplete);
+				Vector3 newPosition = new Vector3 (-canvasWidth+mWidth, 0, transform.localPosition.z);
+			
+				//newPosition.x =-rootCanvasRect.anchoredPosition.x*3;// + myRect.rect.width;
+				transform.localPosition = newPosition;
+				transform.DOLocalMoveX(0, transitionSpeed).OnComplete(TransitionInComplete);
 				break;
 			}
 		case TransitionType.SlideInFromRight:
 			{
-
-				//Vector3 myposition = this.gameObject.transform.localPosition;
-				//myposition.x = myposition.x + myRect.rect.width;
-				////myposition.y = myposition.y - myRect.rect.height;
-				//this.gameObject.transform.localPosition	=myposition;
-				//transform.DOMove(rootCanvasRect.position, transitionSpeed).OnComplete(TransitionComplete);
-				
-				
-				Vector3 newPosition = rootCanvasRect.anchoredPosition;
-				newPosition.x =rootCanvasRect.anchoredPosition.x*3;// + myRect.rect.width;
-				transform.position =newPosition;
-				transform.DOMove(rootCanvasRect.anchoredPosition, transitionSpeed).OnComplete(TransitionInComplete);
+				Vector3 newPosition = new Vector3 (canvasWidth-mWidth, 0, transform.localPosition.z);
+				//newPosition.x = rootCanvasRect.anchoredPosition.x*3;// + myRect.rect.width;
+				transform.localPosition = newPosition;
+				transform.DOLocalMoveX(0, transitionSpeed).OnComplete(TransitionInComplete);
 				break;
 				
 
@@ -197,20 +184,8 @@ public class EFE_PanelTransition : MonoBehaviour {
 				transform.DOMove(rootCanvasRect.anchoredPosition, transitionSpeed).OnComplete(TransitionInComplete);
 				break;
 			}
-			
-		//case TransitionType.FadeIn:
-		//	{
-		//		//TODO
-		//		print("Panel enabled - Fade");
-		//		break;
-		//	}
-		//case TransitionType.ScaleIn:
-		//	{
-		//		//TODO
-		//		print("Panel enabled - ScaleIn");
-		//		break;
-		//	}
-		}
+           
+        }
 		
 		
 	}
@@ -226,10 +201,10 @@ public class EFE_PanelTransition : MonoBehaviour {
 	
 	public void TransitionOutComplete()
 	{
-		//do events that are called by user via inspector
+        //do events that are called by user via inspector
 		transitionOutCompletedEvent.Invoke();
-		gameObject.transform.localScale = new Vector3(0, 0, 0);
-	}
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
+    }
 	
 	
 	IEnumerator DoChildTransitionsIn()
@@ -250,7 +225,6 @@ public class EFE_PanelTransition : MonoBehaviour {
 	public void DoTransitionOut()
 	{
 		SetEasingType();
-		
 		switch (transitionOutType)
 		{
 		case TransitionTypeOut.None:
@@ -260,16 +234,25 @@ public class EFE_PanelTransition : MonoBehaviour {
 			}
 		case TransitionTypeOut.SlideOutToLeft:
 			{
-				Vector3 newPosition = rootCanvasRect.anchoredPosition;
-				newPosition.x =-rootCanvasRect.anchoredPosition.x;// - myRect.rect.width;
-				transform.DOMove(newPosition, transitionSpeed).OnComplete(TransitionOutComplete);
+
+				Vector3 newPosition = new Vector3 (-StaticVariable.screenWidth, 0, transform.localPosition.z);
+
+				//transform.localPosition = newPosition;
+
+
+				//Vector3 newPosition = rootCanvasRect.anchoredPosition;
+				//newPosition.x =-rootCanvasRect.anchoredPosition.x;// - myRect.rect.width;ssss
+				transform.DOLocalMoveX(-canvasWidth+mWidth, transitionSpeed).OnComplete(TransitionOutComplete);
 				break;
 			}
 		case TransitionTypeOut.SlideOutToRight:
 			{
-				Vector3 newPosition = rootCanvasRect.anchoredPosition;
-				newPosition.x =rootCanvasRect.anchoredPosition.x*3;// + myRect.rect.width;
-				transform.DOMove(newPosition, transitionSpeed).OnComplete(TransitionOutComplete);
+				//Vector3 newPosition = rootCanvasRect.anchoredPosition;
+				//newPosition.x =rootCanvasRect.anchoredPosition.x*3;// + myRect.rect.width;
+
+				Vector3 newPosition = new Vector3 (-StaticVariable.screenWidth, 0, transform.localPosition.z);
+
+				transform.DOLocalMoveX(canvasWidth-mWidth, transitionSpeed).OnComplete(TransitionOutComplete);
 				break;
 			}
 		case TransitionTypeOut.SlideOutToTop:

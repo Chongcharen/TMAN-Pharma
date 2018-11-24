@@ -47,6 +47,11 @@ public class UIHelper : MonoBehaviour {
 		}
 	}
 	public static string SetCurrencyWithoutK(float amount){
-		return amount.ToString ("#,###");
+		if (amount > 1000) {
+			return amount.ToString ("#,###");
+		} else {
+			return amount.ToString ();
+		}
 	}
+
 }

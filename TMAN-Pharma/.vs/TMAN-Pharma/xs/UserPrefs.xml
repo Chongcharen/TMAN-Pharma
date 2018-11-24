@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{54B2C846-0D73-EFF7-664B-B181F790441A}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/CustomUI/HorizontalScrollSnap.cs">
+    <Files>
+      <File FileName="Assets/Script/Intent/Popup/FindPlaceTooltipPopup.cs" Line="27" Column="113" />
+      <File FileName="Assets/Script/Utility/LocationService_ex.cs" Line="17" Column="11" />
+      <File FileName="Assets/Script/WebService/TestLocationService.cs" Line="29" Column="1" />
+      <File FileName="Assets/Script/Intent/IntentProfile.cs" Line="147" Column="4" />
+      <File FileName="Assets/Script/Intent/IntentMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/WebService/ServiceRequest.cs" Line="459" Column="10" />
+      <File FileName="Assets/Script/Prefab/PlaceBoard.cs" Line="16" Column="34" />
+      <File FileName="Assets/Script/Prefab/PlaceBoardArea.cs" Line="18" Column="63" />
+      <File FileName="Assets/Script/Intent/Map/FindDirection.cs" Line="119" Column="11" />
+      <File FileName="Assets/Script/Intent/IntentPlaceArea.cs" Line="33" Column="22" />
+      <File FileName="Assets/Script/Utility/Utils.cs" Line="60" Column="38" />
+      <File FileName="Assets/Script/Intent/IntentPlaceResult.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/Intent/IntentCheckin.cs" Line="59" Column="44" />
+      <File FileName="Assets/Script/Intent/IntentInputAddress.cs" Line="42" Column="43" />
+      <File FileName="Assets/Script/WebService/WWWRequest.cs" Line="32" Column="1" />
+      <File FileName="Assets/Script/Intent/IntentNewDetail.cs" Line="60" Column="10" />
+      <File FileName="Assets/Script/CustomUI/HorizontalScrollSnap.cs" Line="15" Column="38" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

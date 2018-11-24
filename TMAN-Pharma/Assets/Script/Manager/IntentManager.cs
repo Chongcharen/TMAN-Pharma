@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class IntentManager : MonoBehaviour {
     public static IntentManager instance;
-    private bool canSlide = true;
     private List<int> historyPage;
     public int currentIndex = 0;
     public int previousIndex = 0;
@@ -13,112 +12,14 @@ public class IntentManager : MonoBehaviour {
     public List<AbstractIntent> listPage;
 
     private AbstractIntent currentIntent, previousIntent, nextIntent;
-    bool intentNextSlide = false;
   
-    void Awake()
-    {
-        instance = this;
-        historyPage = new List<int>();
-       // Events.PageReady += OnPageReadyEvent;
-        
-    }
-    void Start()
-    {
-       
-    }
-
-    
-
-    public void SetIntent(Intent intent)
-    {
-        if (!canSlide) return;
-        nextIndex = (int)intent;
-        if (currentIndex == nextIndex) return;
-        
-        intentNextSlide = true;
-        previousIndex = currentIndex;
-        nextIntent = listPage[nextIndex];
-        currentIntent = listPage[currentIndex];
-        nextIntent.SetNextPosition();
-        nextIntent.gameObject.SetActive(true);
-    }
-
-   /* public void Back()
-    {
-
-        if (!canSlide) return;
-        if (historyPage.Count <= 0) return;
-        if (currentIndex == historyPage[historyPage.Count - 1]) return;
-        previousIndex = historyPage[historyPage.Count - 1];
-        Events.instance.OpenLoader_Dispatch();
-        intentNextSlide = false;
-        previousIntent = listPage[previousIndex];
-        currentIntent = listPage[currentIndex];
-        previousIntent.SetPreviousPosition();
-        previousIntent.gameObject.SetActive(true);
-    }*/
-    public void AddHistoryIntent(int index)
-    {
-        historyPage.Add(index);
-    }
-    public void Back()
-    {
-        Debug.Log(historyPage.Count);
-        if (historyPage.Count <= 0) return;
-       // Debug.Log((Intent)historyPage[historyPage.Count - 1]);
-        EFE_Base.instance.OpenPanelByIndex((Intent)historyPage[historyPage.Count - 1]);
-        historyPage.RemoveAt(historyPage.Count - 1);
-        //Debug.Log("aaa");
-    }
-
-    #region TestSlide
-    public void Nextpage()
-    {
-        SetIntent(Intent.Menu);
-    }
-	
-    public void PreviousPage()
-    {
-        Back();
-    }
-
-    #endregion
-    void SetAnimateSlide()
-    {
-        canSlide = false;
-        StartCoroutine("DelaySlide");
-    }
-    IEnumerator DelaySlide()
-    {
-        yield return new WaitForSeconds(1);
-        canSlide = true;
-    }
-
-
-
-
-    #region Event
-    private void OnPageReadyEvent()
-    {
-        SetAnimateSlide();
-        if (intentNextSlide)
-        {
-            nextIntent.SlideLeft();
-            currentIntent.SlideLeft(false);
-            currentIndex = nextIndex;
-            historyPage.Add(previousIndex);
-        }
-        else
-        {
-            if (historyPage.Count <= 0) return;
-            previousIntent.SlideRight();
-            currentIntent.SlideRight(false);
-            currentIndex = previousIndex;
-            historyPage.RemoveAt(historyPage.Count - 1); 
-        }
-    } 
-    #endregion
 }
 public enum Intent{
-    Login = 0,Register = 1 ,ForgotPassword = 2, Menu = 3 , Inputaddress = 4
+    splashscreen = 0 ,Login = 1,Register = 2 ,ForgotPassword = 3, Menu = 4 , Inputaddress = 5,InputAddressByMap = 6 ,Checkin = 7 ,
+    FindPlace =8 , FindPlaceResult = 9 , FindDirection = 10,Promotion = 11 , PromotionDetail = 12 , PDFProduct = 13,
+	Profile = 14 , SatisFaction = 15 , Recommend = 16 , LuckyDraw = 17 , LuckyDrawSendData = 18 , FindShopResult = 19,PlaceAreaCheckin = 20
+}
+public enum POPUP
+{
+    LOAD = 0 , ALERT = 1 ,CHOICE = 2
 }

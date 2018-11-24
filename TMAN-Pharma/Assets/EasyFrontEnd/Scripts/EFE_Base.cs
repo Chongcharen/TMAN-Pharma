@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class EFE_Base: MonoBehaviour {
@@ -11,8 +12,9 @@ public class EFE_Base: MonoBehaviour {
 	public  GameObject firstPanel; //the first panel you want to display at game start
 	[Tooltip("Should the first panel use its transition the first time it is displayed?")]
 	public bool useFirstPanelTransition;
-	public GameObject [] panelList;
-	public static Vector3 panelLastPosition;
+    public GameObject[] panelList;
+    public GameObject[] overlayList;
+    public static Vector3 panelLastPosition;
 	public GameObject currentPanel;
 	public GameObject previousPanel;
 	public static GameObject currentOverlay;
@@ -21,8 +23,8 @@ public class EFE_Base: MonoBehaviour {
 	
 	EFE_PanelTransition panelTransitionScript;
 	EFE_PanelTransition prevPanelTransitionScript ;
-		
-	// Use this for initialization
+   
+    // Use this for initialization
     void Awake()
     {
         instance = this;
@@ -114,6 +116,7 @@ public class EFE_Base: MonoBehaviour {
 	
 	public void CloseCurrentOverlayPanel()
 	{
+        if (currentOverlay == null) return;
 		if(currentOverlay)
 		{
 			//currentOverlay.transform.position = overlayLastPosition;
@@ -228,24 +231,49 @@ public class EFE_Base: MonoBehaviour {
     {
         nextIndex = (int)index;
         historyIntent.Add(previousIndex);
+       
         previousIndex = nextIndex;
         currentPanel.GetComponent<EFE_PanelTransition>().transitionOutType = EFE_PanelTransition.TransitionTypeOut.SlideOutToLeft;
         panelList[nextIndex].GetComponent<EFE_PanelTransition>().transitionInType = EFE_PanelTransition.TransitionType.SlideInFromRight;
+		currentPanel.GetComponent<EFE_PanelTransition> ().transitionSpeed = 0.13f;
+		panelList [nextIndex].GetComponent<EFE_PanelTransition> ().transitionSpeed = 0.12f;
+
+		//panelList [nextIndex].transform.localPosition = new Vector3 (panelList [nextIndex].GetComponent<RectTransform> ().rect.width-100, 0, 0);
         panelList[nextIndex].SetActive(true);
     }
     public void OpenPreviousIntent()
     {
-        if (historyIntent.Count <= 0) return;
+        if (historyIntent == null ||historyIntent.Count <= 0) return;
         nextIndex = historyIntent[historyIntent.Count - 1];
         currentPanel.GetComponent<EFE_PanelTransition>().transitionOutType = EFE_PanelTransition.TransitionTypeOut.SlideOutToRight;
         panelList[nextIndex].GetComponent<EFE_PanelTransition>().transitionInType = EFE_PanelTransition.TransitionType.SlideInFromLeft;
-        panelList[nextIndex].SetActive(true);
-        historyIntent.RemoveAt(historyIntent.Count -1);
+        
+		currentPanel.GetComponent<EFE_PanelTransition> ().transitionSpeed = 0.13f;
+		panelList[nextIndex].GetComponent<EFE_PanelTransition>().transitionSpeed = 0.12f;
+		//panelList [nextIndex].transform.localPosition = new Vector3 (-panelList [nextIndex].GetComponent<RectTransform> ().rect.width+100, 0, 0);
+		panelList[nextIndex].SetActive(true);
+        if (historyIntent.Count > 0)
+        {
+            historyIntent.RemoveAt(historyIntent.Count - 1);
+        }
        
         previousIndex = nextIndex;
     }
+    public void OpenOverlayByIndex(POPUP overlayIndex)
+    {
+        OpenOverlayPanel(panelList[(int)overlayIndex]);
+    }
+    public void ClearHistory()
+    {
+        historyIntent.Clear();
+    }
+    public void AddHistory(Intent intent)
+    {
+        historyIntent.Add((int)intent);
+    }
     void OnPageReadyEvent()
     {
+       // PopupManager.instance.ClosePopup();
         OpenPanel(panelList[nextIndex]);
     }
 
@@ -262,14 +290,16 @@ public class EFE_Base: MonoBehaviour {
 	public void LoadScene(string sceneName)
 	{
 		
-		Application.LoadLevel(sceneName);
+		//Application.LoadLevel(sceneName);
+		SceneManager.LoadScene (sceneName);
 
 	}
 	
 	public void ReloadCurrentScene()
 	{
 		
-		Application.LoadLevel(Application.loadedLevel);
+		//Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene (Application.loadedLevel);
 
 	}
 	

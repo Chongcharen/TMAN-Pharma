@@ -10,5 +10,6 @@ interface IPageBehavior {
     void ShowBackButton();
     void HideBackButton();
     void AddButtonListeners();
+    void OnBack();
     
 }

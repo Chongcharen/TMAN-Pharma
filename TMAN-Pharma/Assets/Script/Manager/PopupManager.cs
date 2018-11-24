@@ -4,37 +4,36 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 public class PopupManager : MonoBehaviour {
-    public GameObject screen,screenDropdown;
-    public GameObject loader;
+    public static PopupManager instance;
+    public GameObject[] popupList;
 
-	public DropdownPopup dropdownPopup;
+    private GameObject target;
     void Awake()
     {
-        Events.OpenLoader += OpenLoader;
-        Events.PageReady += CloseLoader;
-		Events.LoadInstanceDropdown += Events_LoadInstanceDropdown;
+        instance = this;
     }
-
-    
-
-    private void OpenLoader()
+    public void OpenAlert(string msg, IAcceptPopup iPopup = null, POPUP popupMode = POPUP.ALERT)
     {
-        screen.SetActive(true);
-        loader.SetActive(true);
+        target = popupList[(int)popupMode];
+        EFE_Base.instance.OpenOverlayPanel(target);
+        target.GetComponent<Popup>().SetMessage(msg);
+        if(iPopup == null)
+        {
+            AcceptCallback callBack = new AcceptCallback();
+            callBack.action = delegate { EFE_Base.instance.CloseCurrentOverlayPanel(); };
+			target.GetComponent<Popup> ().AddAccept (callBack);
+        }
+        else
+        {
+            target.GetComponent<Popup>().AddAccept(iPopup);
+        }
     }
-    private void CloseLoader()
+    public void OpenLoading()
     {
-        screen.SetActive(false);
-        loader.SetActive(false);
+        EFE_Base.instance.OpenOverlayPanel(popupList[(int)POPUP.LOAD]);
     }
-
-	void Events_LoadInstanceDropdown (Dropdown target)
-	{
-		//screenDropdown.SetActive (true);
-		dropdownPopup.DropdownUpdate(target);
-		//dropdownPopup.ClearOptions ();
-
-
-	}
-		
+    public void ClosePopup()
+    {
+        EFE_Base.instance.CloseCurrentOverlayPanel();
+    }
 }

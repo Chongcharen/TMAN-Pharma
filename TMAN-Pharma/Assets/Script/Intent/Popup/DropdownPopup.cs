@@ -6,18 +6,23 @@ public class DropdownPopup : MonoBehaviour {
 	public Dropdown dropdown;
 	public Dropdown target;
     public Button blocker;
+    
+    void OnEnable()
+    {
+        Events.LoadInstanceDropdown += DropdownUpdate;
+    }
 	public void DropdownUpdate(Dropdown _target){
 		target = _target;
 		dropdown.value = target.value;
 		dropdown.options = target.options;
 		dropdown.gameObject.SetActive (true);
+        dropdown.RefreshShownValue();
 		dropdown.Show ();
 		dropdown.onValueChanged.AddListener (OnValueChanged);
         
         StartCoroutine(FindBlocker());
 	}
 	void OnValueChanged(int index){
-        Debug.Log("onvaluechanged");
 		Events.instance.DropdownSelect_Dispatch (target,index);
 		ClosePopup ();
 	}

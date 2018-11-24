@@ -26,7 +26,6 @@ public class StaticCoroutine : MonoBehaviour{
 		WWW www = new WWW (path);
 		yield return www;
 		onComplete (www.texture);
-
 	}
 
 }

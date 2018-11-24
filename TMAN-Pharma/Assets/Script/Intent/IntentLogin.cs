@@ -2,28 +2,45 @@
 using System.Collections;
 using UnityEngine.UI;
 public class IntentLogin : AbstractIntent {
-    [SerializeField]
-    Button b_login, b_register, b_forgotpassword;
-    [SerializeField]
-    InputField username_txt, password_txt;
-    void Start()
+    public Button b_login, b_register, b_forgotpassword;
+
+    public InputField username_txt, password_txt;
+   
+    public override void AddButtonListeners()
     {
-        b_login.onClick.AddListener(Login);
+        //base.AddButtonListeners();
+        b_login.onClick.AddListener(OnLogin);
         b_register.onClick.AddListener(Register);
         b_forgotpassword.onClick.AddListener(ForgotPassword);
     }
-    void Login()
+    public override void UpdatePage()
     {
-         ServiceRequest.instance.LoginRequest(username_txt.text,password_txt.text);
-       // EFE_Base.instance.OpenPanel(EFE_Base.instance.panelList[1]);
+        if (!VariableManager.GetInstance.canDispatchListener)
+            return;
+        EFE_Base.instance.ClearHistory();
+        Events.instance.PageReady_Dispatch();
+    }
+    void OnLogin()
+    {
+        if (string.IsNullOrEmpty(username_txt.text))
+        {
+            PopupManager.instance.OpenAlert("กรุณากรอก username");
+            return;
+        }
+        if (string.IsNullOrEmpty(password_txt.text))
+        {
+            PopupManager.instance.OpenAlert("กรุณากรอก password");
+            return;
+        }
+		ServiceRequest.instance.LoginRequest(username_txt.text,password_txt.text,false);
     }
     void Register()
     {
-        IntentManager.instance.SetIntent(Intent.Register);
+        EFE_Base.instance.OpenPanelByIndex(Intent.Register);
     }
     void ForgotPassword()
     {
-        IntentManager.instance.SetIntent(Intent.ForgotPassword);
+        EFE_Base.instance.OpenPanelByIndex(Intent.ForgotPassword);
     }
 
     

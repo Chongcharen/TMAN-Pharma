@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 public class DropDownController : MonoBehaviour {
-	[SerializeField]
-	Dropdown dropdown;
+    [SerializeField]
+    Dropdown dropdown;
 
-	void Awake(){
-		Events.DropdownSelect += Events_DropdownSelect;
-	}
+    void OnEnable() {
+        Events.DropdownSelect += Events_DropdownSelect;
+    }
+    void OnDisable()
+    {
+        Events.DropdownSelect -= Events_DropdownSelect;
+    }
 
 	void Events_DropdownSelect (Dropdown target, int index)
 	{
